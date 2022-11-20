@@ -4,6 +4,7 @@ import jsCookie from "js-cookie";
 import GetRequest from "./GetRequest";
 import GetDetails from "./GetDetails";
 import { useEffect } from "react";
+import {  AiTwotonePrinter } from "react-icons/ai";
 function Navbar(props) {
   const Navigate = useNavigate()
   let Details;
@@ -74,16 +75,18 @@ function Navbar(props) {
       <div
         className={`min-h-full ${navwidth}   bg-slate-900   group    ${enableHover} transition-all border-r-gray-500 border-r-2 `}
       >
-       
-     <div  className="border-b-2 border-white mb-5">
-      <div  className="p-5 text-xl text-white">
-        {`${name}`}
-      </div>
-       </div>
-       <div className="absolute text-white text-lg bottom-5 bg-gray-500 w-52 text-center cursor-pointer " onClick={()=>{logout()}} > 
-          Logout
-       </div>
-      
+        <div className="border-b-2 border-white mb-5">
+          <div className="p-5 text-xl text-white">{`${name}`}</div>
+        </div>
+        <div
+          className="absolute text-white text-lg bottom-5 bg-gray-500 w-52 text-center cursor-pointer "
+          onClick={() => {
+            logout();
+          }}
+        >
+         logout
+        </div>
+
         <div className="bg-transparent ">
           {/* {home button} */}
           <Link to={"/"}>
@@ -116,7 +119,7 @@ function Navbar(props) {
                   fill="white"
                 >
                   <path
-                   fillRule="evenodd"
+                    fillRule="evenodd"
                     d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 000 2h.01a1 1 0 000-2H7z"
                     clipRule="evenodd"
                   />
@@ -183,7 +186,7 @@ function Navbar(props) {
                   fill="white"
                 >
                   <path
-                   fillRule="evenodd"
+                    fillRule="evenodd"
                     d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z"
                     clipRule="evenodd"
                   />

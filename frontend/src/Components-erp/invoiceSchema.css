@@ -1,0 +1,14 @@
+.input1{
+    border-bottom: 2px solid gray;
+    outline: none;
+    text-align: center;
+    width: 100%;
+    
+}
+.unit{
+    padding: 5px;
+    text-align: center;
+}
+.srNo{
+    text-align: center;
+}

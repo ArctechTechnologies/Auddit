@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function App() {
-  
+  const Navigate = useNavigate()
    const [content, setcontent] = useState(<Out/>)
   const changeState=()=>{
     
@@ -41,8 +41,10 @@ function App() {
       console.log(loginCookie);
     if(!loginCookie){
       console.log('token error')
+
      setcontent(
        <>
+       
          {/* <Login Auth={Auth} change={change} /> */}
          {/* <UnAuthUser auth = {Auth}  /> */}
          <Out Auth={Auth} />
@@ -62,7 +64,6 @@ function App() {
            }).then((res) => res.json());
         console.log('res',res)
           if(res ===false){
-           
           setcontent(
             <>
             <Out Auth ={Auth} />

@@ -18,6 +18,7 @@ import Home from "./Home";
 import WorkSpace from "./WorkSpace";
 import jsCookie from "js-cookie";
 import { useEffect } from "react";
+import { AiOutlinePrinter } from "react-icons/ai";
 
 function Content(props) {
   const [contentMargin, setcontentMargin] = useState("ml-56");
@@ -63,6 +64,7 @@ function Content(props) {
    };
    useEffect(() => {
     console.log('set')
+
      getData()
     
    }, [])
@@ -96,7 +98,6 @@ const promt=async(x)=>{
    const aaa = x
    setPromt(aaa)
   setPromtScale('scale-100') 
-  
 }
 const promtClose=()=>{
 
@@ -107,46 +108,62 @@ const promtClose=()=>{
     <>
       <div className="flex   bg-slate-200 h-fit  w-full    relative  ">
         <div className="">
-          <Navbar promt={promt}   />
+          <Navbar promt={promt} />
         </div>
-      <div className={`bg-transparent absolute w-screen h-screen z-50 grid justify-items-center ${PromtScale} `}>
-        <div className="absolute h-fit w-3/6 top-24 bg-white shadow-xl rounded-lg p-10 border-2 text-center">
-          <div className="absolute border-2  right-10 p-2 hover:bg-gray-200 cursor-pointer" onClick={()=>{promtClose()}} >
-            X
-          </div>
-          <div className="text-center font-bold text-2xl  " >
-            MESSAGE 
-          </div>
-         <br></br>
-         <div className="text-lg font-bold " >
-           {`${Promt}`}
-         </div>
-         <br></br>
-         <div className=" grid col-span-2 gap-5">
-           <button className="bg-blue-600 text-white pl-5 pr-5 pt-2 pb-2 rounded-lg   hover:bg-blue-700" onClick={()=>{setPromtYes('yes')}}>
-              OK
-           </button>
-           <button className="border-2 pl-5 pr-5 pt-2 pb-2 rounded-lg  hover:bg-red-500 hover:text-black " onClick={()=>{setPromtNo('No')}} >
-              NO
-           </button>
-         </div>
-        </div>
-
-      </div>
-        <div className={`absolute ml-56 z-40 w-5/6 h-screen bg-white/75 blur-lg grid justify-items-center items-center ${PromtScale} `} >
-        </div>
-        <div className={`  h-screen   bg-inherit `}>
-        
-          <div className="absolute w-20  h-screen bg-white shadow-sm shadow-black right-0   " >
-          
-            <div className="m-2 mt-18  gap-4  h-5/6  justify-items-center"  >
-             <div className=" p-4 text-white  bg-blue-600 text-center rounded-md cursor-pointer"  onClick={()=>{print()}} >
-               Print
-             </div>
-
+        <div
+          className={`bg-transparent absolute w-screen h-screen z-50 grid justify-items-center ${PromtScale} `}
+        >
+          <div className="absolute h-fit w-3/6 top-24 bg-white shadow-xl rounded-lg p-10 border-2 text-center">
+            <div
+              className="absolute border-2  right-10 p-2 hover:bg-gray-200 cursor-pointer"
+              onClick={() => {
+                promtClose();
+              }}
+            >
+              X
+            </div>
+            <div className="text-center font-bold text-2xl  ">MESSAGE</div>
+            <br></br>
+            <div className="text-lg font-bold ">{`${Promt}`}</div>
+            <br></br>
+            <div className=" grid col-span-2 gap-5">
+              <button
+                className="bg-blue-600 text-white pl-5 pr-5 pt-2 pb-2 rounded-lg   hover:bg-blue-700"
+                onClick={() => {
+                  setPromtYes("yes");
+                }}
+              >
+                OK
+              </button>
+              <button
+                className="border-2 pl-5 pr-5 pt-2 pb-2 rounded-lg  hover:bg-red-500 hover:text-black "
+                onClick={() => {
+                  setPromtNo("No");
+                }}
+              >
+                NO
+              </button>
             </div>
           </div>
-   <div className="bg-white w-5/6 ml-5  h-5/6 rounded-2xl mt-2  top-2 absolute shadow-sm shadow-black  overflow-auto   ">
+        </div>
+        <div
+          className={`absolute ml-56 z-40 w-5/6 h-screen bg-white/75 blur-lg grid justify-items-center items-center ${PromtScale} `}
+        ></div>
+        <div className={`  h-screen   bg-inherit `}>
+          <div className="absolute w-20  h-screen bg-white shadow-sm shadow-black right-0   ">
+            <div className="m-2 mt-18  gap-4  h-5/6  justify-items-center">
+              <div
+                className=" p-4  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
+                onClick={() => {
+                  print();
+                }}
+              >
+                <div>{<AiOutlinePrinter size={40} />}</div>
+                
+              </div>
+            </div>
+          </div>
+          <div className="bg-white w-5/6 ml-5  h-5/6 rounded-2xl mt-2  top-2 absolute shadow-sm shadow-black  overflow-auto   ">
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
               <Route
@@ -195,7 +212,6 @@ const promtClose=()=>{
                     SelfAdress={SelfAdress}
                     SelfGSTIN={SelfGSTIN}
                     getData={getData}
-                   
                   />
                 }
               ></Route>

@@ -246,7 +246,7 @@ function Signup(props) {
             </div>
             <div className="text-center">
               Already have an account ?
-              <span className="cursor-pointer text-blue-600 font-semibold" >
+              <span className="cursor-pointer text-blue-600 font-semibold" onClick={()=>{navigate('/login')}} >
                 Login
               </span>
             </div>
