@@ -78,8 +78,11 @@ function Navbar(props) {
         <div className="border-b-2 border-white mb-5">
           <div className="p-5 text-xl text-white">{`${name}`}</div>
         </div>
+        <div className="text-white w-52 text-center text-2xl absolute bottom-5" >
+          AUDDIT
+        </div>
         <div
-          className="absolute text-white text-lg bottom-5 bg-gray-500 w-52 text-center cursor-pointer "
+          className="absolute text-white text-lg bottom-20 bg-gray-500 w-52 text-center cursor-pointer "
           onClick={() => {
             logout();
           }}

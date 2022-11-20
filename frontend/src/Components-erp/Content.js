@@ -64,7 +64,7 @@ function Content(props) {
    };
    useEffect(() => {
     console.log('set')
-
+     
      getData()
     
    }, [])
@@ -163,7 +163,7 @@ const promtClose=()=>{
               </div>
             </div>
           </div>
-          <div className="bg-white w-5/6 ml-5  h-5/6 rounded-2xl mt-2  top-2 absolute shadow-sm shadow-black  overflow-auto   ">
+          <div className="bg-white w-5/6 ml-5  h-5/6  mt-2  top-2 absolute shadow-sm shadow-black  overflow-auto   ">
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
               <Route

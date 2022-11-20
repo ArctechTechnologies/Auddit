@@ -12,3 +12,7 @@
 .srNo{
     text-align: center;
 }
+.amount{
+    text-align: center;
+    font: bold;
+}
