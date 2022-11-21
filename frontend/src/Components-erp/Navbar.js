@@ -8,7 +8,7 @@ import {  AiTwotonePrinter } from "react-icons/ai";
 function Navbar(props) {
   const Navigate = useNavigate()
   let Details;
-  const [navwidth, setnavwidth] = useState("w-52");
+  const [navwidth, setnavwidth] = useState("w-44");
   const [iconRotate, seticonRotate] = useState("rotate-0");
   const [scaller, setscaller] = useState("scale-100");
   const [iconScaller, seticonScaller] = useState(125);
@@ -63,11 +63,9 @@ function Navbar(props) {
     }
   },)
   const Get=async()=>{
-    const res =  await GetRequest()
-    console.log(res)
-    Details = res
-    console.log('details',Details)
-    setname(Details.name)
+    const nam = localStorage.getItem("Username");
+    const nae = JSON.parse(nam);
+    setname(nae);
   }
 
   return (
@@ -76,18 +74,18 @@ function Navbar(props) {
         className={`min-h-full ${navwidth}   bg-slate-900   group    ${enableHover} transition-all border-r-gray-500 border-r-2 `}
       >
         <div className="border-b-2 border-white mb-5">
-          <div className="p-5 text-xl text-white">{`${name}`}</div>
+          <div className="p-5 text-md text-white">{`${name}`}</div>
         </div>
-        <div className="text-white w-52 text-center text-2xl absolute bottom-5" >
+        <div className="text-white w-44 text-center text-xl absolute bottom-5">
           AUDDIT
         </div>
         <div
-          className="absolute text-white text-lg bottom-20 bg-gray-500 w-52 text-center cursor-pointer "
+          className="absolute text-white text-sm bottom-20 bg-gray-500 w-44 text-center cursor-pointer "
           onClick={() => {
             logout();
           }}
         >
-         logout
+          logout
         </div>
 
         <div className="bg-transparent ">
@@ -105,7 +103,7 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold  hover:text-blue-600  ${scaller}  ${hoverScale}  `}
+                className={`text-white text-center font-semibold text-sm hover:text-blue-600  ${scaller}  ${hoverScale}  `}
               >
                 Home
               </div>
@@ -129,7 +127,7 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold  hover:text-blue-600  ${scaller}   ${hoverScale}    `}
+                className={`text-white text-center font-semibold text-sm hover:text-blue-600  ${scaller}   ${hoverScale}    `}
               >
                 Accounts
               </div>
@@ -154,7 +152,7 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold mt-2 hover:text-blue-600  ${scaller} ${hoverScale}   `}
+                className={`text-white text-center font-semibold mt-2 text-sm hover:text-blue-600  ${scaller} ${hoverScale}   `}
               >
                 Bill
               </div>
@@ -173,7 +171,7 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold mt-2 hover:text-blue-600  ${scaller} ${hoverScale}  `}
+                className={`text-white text-center font-semibold mt-2 text-sm hover:text-blue-600  ${scaller} ${hoverScale}  `}
               >
                 PrintInvoice
               </div>
@@ -196,7 +194,7 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold mt-2  hover:text-blue-600  ${scaller} ${hoverScale}  `}
+                className={`text-white text-center font-semibold mt-2 text-sm hover:text-blue-600  ${scaller} ${hoverScale}  `}
               >
                 Transactions
               </div>

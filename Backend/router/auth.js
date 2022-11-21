@@ -22,32 +22,28 @@ router.get("/", (req, res) => {
 });
 router.post("/create", async (req, res) => {
   const i = 1;
-  const { invoice, totalAmount, Receiver,Cookie,Date,Month } = req.body;
-  console.log('cookie',Cookie)
-  invoice.shift();
-  const { invoices } = invoice;
-  console.log('invoice',invoices);
- 
-  const cookie = await AuthCookie(Cookie);
-   const find = await User.findOne({Cookie:cookie})   // get Sender's username
-   const {name}  = find ;
-   const Sender = name;
+  const { invoice, Cookie, SGST, CGST, GrandTotal, BilledTo, ShippedTo,Name } = req.body;
+    
+   const  cookie = await AuthCookie(Cookie)
+      const date = Date.now()
+       const Sender =  Name
    
    try{
 
      const updateSender = await Invoice.findOneAndUpdate(    // updates  Senders Entery
      { Cookie: cookie },
-     { $push: { invoices: { Receiver, totalAmount,Date,Month, invoice } } }
+     { $push: { invoices: { BilledTo, GrandTotal,date, invoice } } }
      );
      const updateReceiver = await Invoice.findOneAndUpdate(   //updates Receiver Entery
-     { Username: Receiver },
-     { $push: { ReceivedInvoices: { Sender, totalAmount, Date,Month,invoice } } }
+     { Username: BilledTo },
+     { $push: { ReceivedInvoices: { Sender, GrandTotal, date,invoice } } }
      );
 
      if(!updateSender||!updateReceiver){
        res.json('probleum')
      }else{
        res.json('created')
+       console.log('created')
      }
      
      
@@ -129,7 +125,7 @@ router.post("/getTrans", async (req, res) => {
  res.json(invoices)
   
 });
-router.post("/searchuser", async (req, res) => {
+router.post("/Search", async (req, res) => {
   const { value } = req.body;
   const searchUser = value;
   console.log(value);

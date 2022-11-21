@@ -150,10 +150,10 @@ const promtClose=()=>{
           className={`absolute ml-56 z-40 w-5/6 h-screen bg-white/75 blur-lg grid justify-items-center items-center ${PromtScale} `}
         ></div>
         <div className={`  h-screen   bg-inherit `}>
-          <div className="absolute w-20  h-screen bg-white shadow-sm shadow-black right-0   ">
+          <div className="absolute w-16  h-screen bg-white shadow-sm shadow-black right-0   ">
             <div className="m-2 mt-18  gap-4  h-5/6  justify-items-center">
               <div
-                className=" p-4  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
+                className=" p-2  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
                 onClick={() => {
                   print();
                 }}
@@ -163,7 +163,8 @@ const promtClose=()=>{
               </div>
             </div>
           </div>
-          <div className="bg-white w-5/6 ml-5  h-5/6  mt-2  top-2 absolute shadow-sm shadow-black  overflow-auto   ">
+          {/* Main workspace */}
+          <div className="bg-white  w-5/6  ml-3  h-5/6  mt-2  top-2 absolute shadow-sm shadow-black  overflow-auto   "> 
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
               <Route
