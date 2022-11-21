@@ -14,6 +14,7 @@ function PrintInvoices(props) {
    const [SelfAdress, setSelfAdress] = useState("");
    const [SelfGSTIN, setSelfGSTIN] = useState("");
    const [SelfEmail, setSelfEmail] = useState("");
+   const [GrandTotal, setGrandTotal] = useState()
 //  const [props.Self, setprops.Self] = useState('')
 //  const [props.SelfAdress, setprops.SelfAdress] = useState('')
 //  const [props.SelfGSTIN, setprops.SelfGSTIN] = useState('')
@@ -110,14 +111,20 @@ function PrintInvoices(props) {
     l = l - 1;
     
     const { invoice } = invoices[l];
+ 
    
-    const { Receiver } = invoices[l];
-   
+    const { BilledTo } = invoices[l];
+    const { GrandTotal } = invoices[l];
+    
+    setGrandTotal(GrandTotal)
+     const Receiver = BilledTo
     await getReceiver(Receiver);
     
     for (let j = 0; j <= invoice.length -1 ; j++) {
       transactions.push(invoice[j]);
+
     }
+   
     const parentElement = document.getElementById("tbody");
     const trElement = document.createElement("tr");
     trElement.setAttribute('style','border:2px Solid black')
@@ -231,24 +238,24 @@ function PrintInvoices(props) {
             {
               //headers
             }
-            <div className="text-center font-bold  text-lg ">TAX INVOICE</div>
-            <div className="text-center font-bold  font-mono text-3xl ">
+            <div className="text-center font-bold  text-md ">TAX INVOICE</div>
+            <div className="text-center font-bold  font-mono text-2xl ">
               {`${Self}`}
             </div>
-            <div className="text-center text-lg font-bold ">
+            <div className="text-center text-md font-bold ">
               {`${SelfAdress}`}
             </div>
-            <div className="text-center font-bold  text-lg ">
+            <div className="text-center font-bold  text-md ">
               {`UTTRAKHAND INDIA-248197`}
             </div>
-            <div className="text-center font-bold text-sm border-b-2 border-black ">
+            <div className="text-center font-bold text-xs border-b-2 border-black ">
               {`Tel: 09258350222,9917468057 Email: diya.12018@yahoo.com`}
             </div>
             {
               //invoice details   2 sections flex container
             }
             <div className="grid grid-cols-2 ">
-              <div className="font-bold text-sm border-r-2 border-b-2 border-black  ">
+              <div className="font-bold text-xs border-r-2 border-b-2 border-black  ">
                 <div>
                   {`Invoice Number`} {`:  2021/2022/465 `}
                 </div>
@@ -260,7 +267,7 @@ function PrintInvoices(props) {
                 <div className="">{`Reverse Charge  : No `}</div>
                 <div></div>
               </div>
-              <div className="font-bold text-sm border-b-2 border-black ">
+              <div className="font-bold text-xs border-b-2 border-black ">
                 <div className="pr-5">
                   {`Transportation Mode`}{" "}
                   {`: (Apply For Supply of Goods Only) `}
@@ -281,39 +288,39 @@ function PrintInvoices(props) {
               <div className="grid grid-cols-2  border-b-2 border-black ">
                 <div className="font-bold border-r-2 border-black  ">
                   <div className="font-bold  border-black ">
-                    <div className="text-sm">Billed To:</div>
+                    <div className="text-xs">Billed To:</div>
                     <div
                       id="ShippedTo"
-                      className="text-2xl"
+                      className="text-xl"
                     >{`${Receiver}`}</div>
-                    <div className="text-sm">
+                    <div className="text-xs">
                       {`Adress :`} {`${ReceiverAdress}`}
                     </div>
-                    <div className="text-sm">
+                    <div className="text-xs">
                       {`State :`} {`Dehradun,Uttrakhand-248197`}
                     </div>
-                    <div className="text-sm">
+                    <div className="text-xs">
                       {`State Code:`} {`05`}
                     </div>
-                    <div className="text-sm">
+                    <div className="text-xs">
                       {`GSTIN No. : `} {`${ReceiverGSTIN}`}
                     </div>
                   </div>
                 </div>
-                <div className="font-bold text-sm    ">
+                <div className="font-bold text-xs    ">
                   <div className="font-bold  ">
-                    <div className="text-sm">Shipped To:</div>
-                    <div className="text-2xl">{`${Receiver}`}</div>
-                    <div className="text-sm">
+                    <div className="text-xs">Shipped To:</div>
+                    <div className="text-xl">{`${Receiver}`}</div>
+                    <div className="text-xs">
                       {`Adress :`} {`${ReceiverAdress}`}
                     </div>
-                    <div className="text-sm">
+                    <div className="text-xs">
                       {`State :`} {`Dehradun,Uttrakhand-248197`}
                     </div>
-                    <div className="text-sm">
+                    <div className="text-xs">
                       {`State Code:`} {`05`}
                     </div>
-                    <div className="text-sm">
+                    <div className="text-xs">
                       {`GSTIN No. : `} {`${ReceiverGSTIN}`}
                     </div>
                   </div>
@@ -323,38 +330,36 @@ function PrintInvoices(props) {
                 <table>
                   <thead className="border-b-2 border-black">
                     <tr>
-                      <td className="border-r-2  w-1/12 border-black text-center font-bold ">
+                      <td className="border-r-2 text-sm w-1/12 border-black text-center font-bold ">
                         Sr No.
                       </td>
-                      <td className="border-r-2  w-4/12 border-black text-center font-bold ">
+                      <td className="border-r-2 text-sm w-4/12 border-black text-center font-bold ">
                         Description of Goods
                       </td>
-                      <td className="border-r-2  w-1/12 border-black text-center font-bold ">
+                      <td className="border-r-2 text-sm w-1/12 border-black text-center font-bold ">
                         HSN/SAC Code
                       </td>
-                      <td className="border-r-2  w-1/12 border-black text-center font-bold ">
+                      <td className="border-r-2 text-sm w-1/12 border-black text-center font-bold ">
                         QTY.
                       </td>
-                      <td className="border-r-2  w-1/12 border-black text-center font-bold ">
+                      <td className="border-r-2 text-sm w-1/12 border-black text-center font-bold ">
                         Unit
                       </td>
-                      <td className="border-r-2  w-1/12  border-black text-center font-bold ">
+                      <td className="border-r-2 text-sm  w-1/12 border-black text-center font-bold ">
                         Price
                       </td>
-                      <td className="border-r-2  border-black "></td>
+                      <td className="border-r-2  border-black  text-center ">Amount</td>
                     </tr>
                   </thead>
                   <tbody id="tbody"></tbody>
                 </table>
                 <div className="border-b border-black ">
-                  Amount :-{" "}
-                  {"Twenty Seven Thousand Four Hundred Ninety four only"}
+                  Amount :-{`${GrandTotal}`}
                 </div>
               </div>
             </div>
           </div>
         </div>
-       
       </div>
     </>
   );
