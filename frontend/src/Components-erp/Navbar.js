@@ -39,21 +39,7 @@ function Navbar(props) {
       sethoverScale("");
     }
   };
-  const logout=async()=>{
-    //  document.cookie = 'logincookie' + ";max-age=0";
-    // const log =  await  props.promt()
-    // if(log === 'yes'){
 
-      jsCookie.remove('loginCookie')
-      Navigate('/login')
-      window.alert("Logged Out")
-      window.location.reload()
-    // }else{
-      
-    // }
-
-
-  }
   let effectCount = 0;
   useEffect(() => {
     if(effectCount===0){
@@ -79,14 +65,7 @@ function Navbar(props) {
         <div className="text-white w-44 text-center text-xl absolute bottom-5">
           AUDDIT
         </div>
-        <div
-          className="absolute text-white text-sm bottom-20 bg-gray-500 w-44 text-center cursor-pointer "
-          onClick={() => {
-            logout();
-          }}
-        >
-          logout
-        </div>
+   
 
         <div className="bg-transparent ">
           {/* {home button} */}
@@ -110,7 +89,7 @@ function Navbar(props) {
             </div>
           </Link>
           {/* 2 btn accounts */}
-          <Link to="/settings">
+          <Link to="/Account">
             <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4  ">
               <div className=" w-16 place-items-center  ">
                 <svg

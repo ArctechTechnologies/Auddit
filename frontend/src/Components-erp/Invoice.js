@@ -9,6 +9,7 @@ function Invoice() {
   const Navigate = useNavigate()
   let srCount = 0;
   let effectCount = 0;
+  const [countx, setcountx] = useState(0)
   const [Name, setName] = useState("");
   const [totalAmount, settotalAmount] = useState(0)
   const [CGST, setCGST] = useState(0)
@@ -88,6 +89,7 @@ effectCount++
     const id = e.target.id[0]
     const element = document.getElementById(`tr${id}`)
     element.remove()
+    setcountx(countx--)
   }
   const append = () => {       // function to create new data input field on button click 
     const parentElement = document.getElementById("tbody");
@@ -227,9 +229,10 @@ const selectValue=(e)=>{          //function to  set both values of b & shipped 
    
 }
   const submit = async() => {     //function to submit invoice
+    console.log('srcount',count)
     let co = 0;
     let cot = 1;
-    let count = 2;
+    let countn = 2;
     let count2 = 3;
     let count3 = 4;
     let count4 = 5;
@@ -237,10 +240,10 @@ const selectValue=(e)=>{          //function to  set both values of b & shipped 
     let count6 = 7;
     
   const ddd = new Date();
-    for(let i=1;i<=srCount + 1;i++){
+    for(let i=1;i<=count ;i++){
         invoice.push({
         srNo: i,
-        Description: document.getElementById(`${i}input${count}`).value,
+        Description: document.getElementById(`${i}input${countn}`).value,
         // D2: document.getElementById(`${i}des${cot}`).value,
         // D3: document.getElementById(`${i}des${count}`).value,
         Code: document.getElementById(`${i}input${count2}`).value,
@@ -266,11 +269,11 @@ const selectValue=(e)=>{          //function to  set both values of b & shipped 
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ invoice,Cookie,SGST,CGST,GrandTotal,BilledTo,ShippedTo,Name }),
-    }).then(res = res.json())
-      
-  if(res==='probleum'){
+    })
+      const result =  await res.json()
+  if(result==='probleum'){
       window.alert('a probleum occured')
-    }else if(res==='created'){
+    }else if(result==='created'){
       window.prompt("Invoice created ")
       Navigate('/print')
       

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Navbar from "./Navbar";
 import Topbar from "./Topbar";
 
-
+import { useNavigate } from "react-router-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Settings from "./Settings";
 import Invoice from "./Invoice";
@@ -19,8 +19,11 @@ import WorkSpace from "./WorkSpace";
 import jsCookie from "js-cookie";
 import { useEffect } from "react";
 import { AiOutlinePrinter } from "react-icons/ai";
+import Accounts from "./Accounts";
+import {BiPowerOff} from "react-icons/bi";
 
 function Content(props) {
+  const Navigate = useNavigate()
   const [contentMargin, setcontentMargin] = useState("ml-56");
   const [PromtYes, setPromtYes] = useState('')
   const [PromtNo, setPromtNo] = useState('')
@@ -104,6 +107,19 @@ const promtClose=()=>{
   setPromtScale('scale-0')
 
 }
+  const logout = async () => {
+    //  document.cookie = 'logincookie' + ";max-age=0";
+    // const log =  await  props.promt()
+    // if(log === 'yes'){
+
+    jsCookie.remove("loginCookie");
+    Navigate("/login");
+    window.alert("Logged Out");
+    window.location.reload();
+    // }else{
+
+    // }
+  };
   return (
     <>
       <div className="flex   bg-slate-200 h-fit  w-full    relative  ">
@@ -159,14 +175,22 @@ const promtClose=()=>{
                 }}
               >
                 <div>{<AiOutlinePrinter size={40} />}</div>
-                
+              </div>
+              <div
+                className=" p-2  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
+                onClick={() => {
+                  logout();
+                }}
+              >
+                <div>{<BiPowerOff size={40} />}</div>
               </div>
             </div>
           </div>
           {/* Main workspace */}
-          <div className="bg-white  w-5/6  ml-3  h-5/6  mt-2  top-2 absolute shadow-sm shadow-black  overflow-auto   "> 
+          <div className="bg-white  w-5/6  ml-3  h-5/6  mt-2  top-2 absolute shadow-sm shadow-black  overflow-auto   ">
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
+              <Route exact path="/Account" element={<Accounts />}></Route>
               <Route
                 exact
                 path="/invoices"
