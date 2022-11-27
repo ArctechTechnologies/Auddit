@@ -89,13 +89,17 @@ effectCount++
     const id = e.target.id[0]
     const element = document.getElementById(`tr${id}`)
     element.remove()
-    setcountx(countx--)
+    let aa = count-1
+    console.log('aa',aa)
+     setcount(aa)
+    console.log('setCount',count)
   }
   const append = () => {       // function to create new data input field on button click 
     const parentElement = document.getElementById("tbody");
     srCount = count + 1;
-      setcount(srCount)
-    console.log("sr", srCount);
+    console.log('sr',srCount)
+      setcount(srCount) 
+    console.log("sr", count);
     const trElement = document.createElement("tr");
     const tdElement = document.createElement("td");
     const amountElement = document.createElement("div");
@@ -264,11 +268,12 @@ const selectValue=(e)=>{          //function to  set both values of b & shipped 
      const cookie = jsCookie.get()
     const {loginCookie}= cookie
     const Cookie = loginCookie
-  
+   const status = 'not paid'
+   const Type = 'send'
     const res = await fetch("/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ invoice,Cookie,SGST,CGST,GrandTotal,BilledTo,ShippedTo,Name }),
+      body: JSON.stringify({ invoice,Cookie,SGST,CGST,GrandTotal,BilledTo,ShippedTo,Name,status,Type }),
     })
       const result =  await res.json()
   if(result==='probleum'){
@@ -386,8 +391,9 @@ const selectValue=(e)=>{          //function to  set both values of b & shipped 
             </div>
           </div>
           <div className="ml-5 mt-5">
-            <button className="bg-purple-500/50 border-2 border-purple-500 pt-2 pb-2 pl-5 pr-5 "
-            onClick={()=>submit()}>
+         
+            <button class="bg-transparent hover:bg-purple-500 text-purple-700 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded"
+             onClick={()=>submit()}>
               Create
             </button>
           </div>

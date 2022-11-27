@@ -21,6 +21,7 @@ import { useEffect } from "react";
 import { AiOutlinePrinter } from "react-icons/ai";
 import Accounts from "./Accounts";
 import {BiPowerOff} from "react-icons/bi";
+import CreditAccount from "./CreditAccount";
 
 function Content(props) {
   const Navigate = useNavigate()
@@ -139,10 +140,10 @@ const promtClose=()=>{
               X
             </div>
             <div className="text-center font-bold text-2xl  ">MESSAGE</div>
-            <br></br>
-            <div className="text-lg font-bold ">{`${Promt}`}</div>
-            <br></br>
-            <div className=" grid col-span-2 gap-5">
+              <br></br>
+               <div className="text-lg font-bold ">{`${Promt}`}</div>
+              <br></br>
+               <div className=" grid col-span-2 gap-5">
               <button
                 className="bg-blue-600 text-white pl-5 pr-5 pt-2 pb-2 rounded-lg   hover:bg-blue-700"
                 onClick={() => {
@@ -191,6 +192,7 @@ const promtClose=()=>{
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
               <Route exact path="/Account" element={<Accounts />}></Route>
+              <Route exact path="/CreditAccount" element={<CreditAccount />}></Route>
               <Route
                 exact
                 path="/invoices"

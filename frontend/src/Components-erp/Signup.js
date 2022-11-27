@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {  useNavigate } from 'react-router-dom';
+import {  Navigate, useNavigate } from 'react-router-dom';
 import {
   TiBusinessCard,
   TiLocation,
@@ -75,11 +75,15 @@ function Signup(props) {
         body: JSON.stringify({user:userDetails}),
       }).then( res=>res.json())
       console.log(res)
+      
       const {errorCode} = res
      
-      if(errorCode){
-        window.alert(errorCode)
-        console.log(errorCode)
+      if(!errorCode){
+        window.alert('registered sucessfully')
+       navigate('/login')
+      }else{
+ window.alert(errorCode);
+ console.log(errorCode);
       }
 
       

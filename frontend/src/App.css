@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html{
+    scrollbar-color: green;
+}
 
 hr{
     color: black;

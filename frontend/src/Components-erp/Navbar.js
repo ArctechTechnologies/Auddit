@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate, NavLink, Router, useNavigate } from "react-router-dom";
+import { Link, NavLink, Router, useNavigate } from "react-router-dom";
 import jsCookie from "js-cookie";
 import GetRequest from "./GetRequest";
 import GetDetails from "./GetDetails";

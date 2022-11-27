@@ -33,14 +33,11 @@ function PrintInvoices(props) {
     {
       Amount: String,
       Code: String,
-      D2: String,
-      D3: String,
       Description: String,
-      Rate: String,
+      Price: String,
       Unit: String,
       qty: String,
       SrNo: Number,
-      Rate: String,
     },
   ];
 
@@ -98,33 +95,44 @@ function PrintInvoices(props) {
     const cookie = jsCookie.get();
     const { loginCookie } = cookie;
     const Cookie = loginCookie;
-    await props.getdata
+     
     const res = await fetch("/getBill", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ Cookie }),
     });
     const data = await res.json();
-    const { invoices } = data;
-  
-    let l = invoices.length;
-    l = l - 1;
+     console.log('asvdas',data)
+    const { Transactions } = data;
+    console.log(Transactions.length)
+  let l=0;
+      let count = Transactions.length - 1;
+      
+      for (count; count <= 0; count--) {
+        console.log(Transactions[count])
+        const { Type } = Transactions[count];
+        if (Type === "Send") {
+          l = count;
+          console.log('l',l)
+          break;
+        } else {
+        }
+      }
+     
     
-    const { invoice } = invoices[l];
- 
-   
-    const { BilledTo } = invoices[l];
-    const { GrandTotal } = invoices[l];
-    
+    const { invoice } = Transactions[l];
+    const { GrandTotal } = Transactions[l];
+    const {Name} = Transactions[l]
     setGrandTotal(GrandTotal)
-     const Receiver = BilledTo
-    await getReceiver(Receiver);
+     const Receiver = Name
+  //  await getReceiver(Receiver);
     
     for (let j = 0; j <= invoice.length -1 ; j++) {
       transactions.push(invoice[j]);
 
     }
-   
+
+   console.log('transaction',transactions)
     const parentElement = document.getElementById("tbody");
     const trElement = document.createElement("tr");
     trElement.setAttribute('style','border:2px Solid black')
@@ -181,7 +189,8 @@ function PrintInvoices(props) {
             break;
             case 6:
               
-              createdTd.innerText = index.Rate
+              createdTd.innerText = index.Price
+              break;
               case 7:
                 createdTd.innerText = index.Amount
                   break;
@@ -205,7 +214,7 @@ function PrintInvoices(props) {
 
   const getReceiver = async (Receiver) => {
     //convert this to post request to pass username of receiver
-
+        console.log(Receiver)
     const res = await fetch("/getReceiver", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

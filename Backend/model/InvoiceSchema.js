@@ -6,18 +6,9 @@ const InvoiceSchema = new mongoose.Schema({
   Username: {
     type: String,
   },
-  invoices: [
-    
+Transactions:[
   
-   
-    
-  ],
-  ReceivedInvoices: [
-    
-  
-   
-    
-  ],
+],
 
   Cookie:{
     type:String
