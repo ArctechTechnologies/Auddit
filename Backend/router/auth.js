@@ -10,9 +10,9 @@ const res = require("express/lib/response");
 const assert = require("assert");
 const req = require("express/lib/request");
 const { Console } = require("console");
-const AuthCookie = require('../model/middleware/AuthCookie')
-const CreateCookie = require('../model/middleware/CreateCookie')
-const Account = require('../model/accountSchema')
+const AuthCookie = require("../model/middleware/AuthCookie");
+const CreateCookie = require("../model/middleware/CreateCookie");
+const Account = require("../model/accountSchema");
 
 const router = express.Router();
 require("../db/conn");
@@ -22,38 +22,106 @@ router.get("/", (req, res) => {
 });
 router.post("/create", async (req, res) => {
   const i = 1;
-  const { invoice, Cookie, SGST, CGST, GrandTotal, BilledTo, ShippedTo,Name ,status,Type} = req.body;
-    
-   const  cookie = await AuthCookie(Cookie)
-      const date = Date.now()
-       const Sender =  Name
-      const type = 'received'
+  const {
+    invoice,
+    Cookie,
+    SGST,
+    CGST,
+    GrandTotal,
+    BilledTo,
+    ShippedTo,
+    Name,
+    status,
+    Type,
+  } = req.body;
 
-   try{
+  const cookie = await AuthCookie(Cookie);
+  const ddd = new Date();
+  const daate = ddd.getDate();
+  const Month = ddd.getMonth();
+  const Year = ddd.getFullYear();
+  const date = daate + "/" + Month + "/" + Year;
+  console.log(date);
+  const Sender = Name;
+  const type = "received";
+  const billed = await User.findOne({ Username: BilledTo });
+  console.log(billed);
+  const { name } = billed;
+  const user = await Account.findOne({Cookie:cookie})
+  console.log(name);
+  let current = false
+  let party
+  const {Client} = user
+  try {
+    Client.map((index)=>{
+      if(name===Client[index].name)
+      {
+        current = true
 
+        party = Client[index].name;
+      
+   
+    }
+
+    })
+    if (current === true) {
+      if(party.type===true){
+
+        const { Username, Debitor, Creditor } = party;
+        Creditor = Creditor + GrandTotal;
+        Debitor = Debitor + GrandTotal;
+        const updatecreditor = await Account.findOneAndUpdate({
+          Cookie: cookie,
+          Client: name,
+        },{$set:{Creditor:Creditor}});
+        const updateDebtor = await Account({name:name,Client:Name},{$set:{Debitor:Debitor}})
+       const updateReceiver = await Account.findOneAndUpdate(
+         //updates Receiver Entery
+         { Username: BilledTo },
+         {
+           $push: {
+             Transactions: {
+               Name: Sender,
+               SGST,
+               CGST,
+               GrandTotal,
+               date,
+               invoice,
+               status,
+               Type: type,
+             },
+           },
+         }
+       );
+       const updateSender = await Account.findOneAndUpdate(
+         //updates Receiver Entery
+         { Cookie: cookie },
+         {
+           $push: {
+             Transactions: {
+               Name: name,
+               SGST,
+               CGST,
+               GrandTotal,
+               date,
+               invoice,
+               status,
+               Type,
+             },
+           },
+         }
+       );
+      }
+
+      
+      }
     
-     const updateReceiver = await Invoice.findOneAndUpdate(   //updates Receiver Entery
-     { Username: BilledTo },
-     { $push: { Transactions: { Name:Sender,SGST,CGST, GrandTotal, date,invoice,status,Type:type } } }
-     );
-     const updateSender = await Invoice.findOneAndUpdate(   //updates Receiver Entery
-     { Cookie: cookie },
-     { $push: { Transactions: { Name:BilledTo,SGST,CGST, GrandTotal, date,invoice,status,Type } } }
-     );
-     
-     if(!updateSender||!updateReceiver){
-       res.json('probleum')
-     }else{
-       res.json('created')
-       console.log('created')
-     }
-     
-     
-    }
-    catch(err){
-      console.log('error',err)
-    }
-  
+
+
+   
+  } catch (err) {
+    console.log("error", err);
+  }
 });
 router.post("/Register", async (req, res) => {
   let received = req.body;
@@ -86,15 +154,10 @@ router.post("/Register", async (req, res) => {
           Type,
         });
         const result = await use.save();
-        const inVoiceUse = await new Invoice({
-          Username,
-        });
-        const invoiceResult = await inVoiceUse.save();
-        console.log(invoiceResult);
-        const createAccount = await new Account({Username})
-        const createdAccount = await createAccount.save()
+        const createAccount = await new Account({ Username });
+        const createdAccount = await createAccount.save();
 
-        if (!result||!invoiceResult||!createdAccount) {
+        if (!result || !createdAccount) {
           console.log("dberror");
           res.json({ errorCode: "dberror" });
         } else {
@@ -109,8 +172,8 @@ router.post("/Register", async (req, res) => {
   }
 });
 router.get("/get", async (req, res) => {
-    const aa = req.cookies
-    console.log(aa)
+  const aa = req.cookies;
+  console.log(aa);
   const findUser = await Invoice.findOne({ Cookie: aa });
   console.log(findUser);
   const { invoices } = findUser;
@@ -118,13 +181,12 @@ router.get("/get", async (req, res) => {
   res.json(invoices);
 });
 router.post("/getTrans", async (req, res) => {
- const {Cookie} = req.body
- 
-   const cookie  =  await AuthCookie(Cookie)
-  const Find = await Invoice.findOne({ Cookie: cookie });
-  const {Transaction} = Find
-  res.json(Transaction)
-  
+  const { Cookie } = req.body;
+
+  const cookie = await AuthCookie(Cookie);
+  const Find = await Account.findOne({ Cookie: cookie });
+  const { Transaction } = Find;
+  res.json(Transaction);
 });
 router.post("/Search", async (req, res) => {
   const { value } = req.body;
@@ -159,39 +221,36 @@ router.post("/login", async (req, res) => {
   const { Username, Password } = req.body;
   const pass = Password;
   const finduser = await User.findOne({ Username: Username });
-  
+
   if (!finduser) {
     return res.json("error");
   } else {
     const { Password } = finduser;
     if (Password === pass) {
-     // const Cookie = 'Diya'
-      const Cookie =  Math.random()+ 'x' + Math.random();
-      console.log('Cookie',Cookie)
-      const cookie = await CreateCookie(Cookie)
-      console.log('innnnnn')
-      const aaa = await AuthCookie(cookie)
-      console.log('aaa',aaa)
+      // const Cookie = 'Diya'
+      const Cookie = Math.random() + "x" + Math.random();
+      console.log("Cookie", Cookie);
+      const cookie = await CreateCookie(Cookie);
+      console.log("innnnnn");
+      const aaa = await AuthCookie(cookie);
+      console.log("aaa", aaa);
 
-      try{
-       
-       const UpdateUser = await User.findOneAndUpdate(
-         { Username: Username },
-         { Cookie:Cookie }
-       );
-       UpdateUser.save()
-       const UpdateInvoice = await Invoice.findOneAndUpdate(
-         { Username: Username },
-         { Cookie:Cookie }
-         );
-         UpdateInvoice.save()
-         
-        }catch(err){
-          console.log(err)
+      try {
+        const UpdateUser = await User.findOneAndUpdate(
+          { Username: Username },
+          { Cookie: Cookie }
+        );
+        UpdateUser.save();
+        const UpdateInvoice = await Account.findOneAndUpdate(
+          { Username: Username },
+          { Cookie: Cookie }
+        );
+        UpdateInvoice.save();
+      } catch (err) {
+        console.log(err);
       }
-     
 
-        res.json(cookie);
+      res.json(cookie);
     } else {
       res.json("error");
     }
@@ -204,66 +263,72 @@ router.get("/getBilledTo", async (req, res) => {
   res.json(find);
 });
 router.post("/Auth", async (req, res) => {
-    console.log('inauth')
-  const {loginCookie} = req.body;
-  console.log(loginCookie)
-  if(loginCookie === ''){
-    res.json(false)
-  }else{
-
-    const cookie = await AuthCookie(loginCookie);  
+  console.log("inauth");
+  const { loginCookie } = req.body;
+  console.log(loginCookie);
+  if (loginCookie === "") {
+    res.json(false);
+  } else {
+    const cookie = await AuthCookie(loginCookie);
     const FindUser = await User.findOne({
-    Cookie: cookie,
-  });
+      Cookie: cookie,
+    });
+    if (!FindUser) {
+      res.json(false);
+    } else {
+      res.json(true);
+    }
+  }
+});
+router.post("/getReq", async (req, res) => {
+  const { loginCookie } = req.body;
+  const Cookie = loginCookie;
+  const verify = await AuthCookie(Cookie);
+  const FindUser = await User.findOne({ Cookie: verify });
   if (!FindUser) {
     res.json(false);
   } else {
-    res.json(true);
+    res.json(FindUser);
   }
-}
 });
-router.post('/getReq',async(req,res)=>{
-  const {loginCookie} = req.body
-  const Cookie = loginCookie
-  const verify = await AuthCookie(Cookie)
-  const FindUser = await User.findOne({Cookie:verify})
-  if(!FindUser){
-    res.json(false)
-  }else{
-    res.json(FindUser)
-  }
+
+router.post("/getData", async (req, res) => {
+  const { Cookie } = req.body;
+  const cookie = await AuthCookie(Cookie);
+  const user = await User.findOne({
+    Cookie: cookie,
+  });
+  const account = await Account.findOne({ Cookie: cookie });
+  console.log(user, account);
+  const dat = {
+    user,
+    account,
+  };
+  res.json(dat);
+});
+router.post("/getBill", async (req, res) => {
+  const { Cookie } = req.body;
+  const cookie = await AuthCookie(Cookie);
+  const Find = await Account.findOne({ Cookie: cookie });
+  res.json(Find);
+});
+router.post("/getReceiver", async (req, res) => {
+  const { Receiver } = req.body;
+  const FindUser = await User.findOne({
+    Username: Receiver,
+  });
+  console.log(FindUser);
+  res.json(FindUser);
+});
+
+router.post('/addDemoClient',async(req,res)=>{
+   const { name, GSTIN, Adress, Username, Email, Type,Cookie } = req.body;
+    const cookie = AuthCookie(Cookie)
+    const addClient = await Account.findOneAndUpdate({Cookie:cookie},{$push:{Username:Username,Name:name,Debitor:0,Creditor:0}})
+    const addParty = await Account.findOneAndUpdate({Cookie:cookie},{$push:{Username,Name:name,GSTIN:GSTIN,Adress:Adress,Email:Email,Type:false}})
+      
+})
 
 
-})
-router.post('/no',async(req,res)=>{
 
-  const Username = 'diyain'
-  const Find =  await Invoice.findOne({Username:Username})
-  console.log(Find)
-  const {invoices} = Find
-  res.json(invoices)
-
-})
-router.post('/getData',async(req,res)=>{
-   const { Cookie } = req.body;
-   const cookie = await AuthCookie(Cookie);
-   const FindUser = await User.findOne({
-     Cookie: cookie,
-   });
-   res.json(FindUser)
-})
-router.post('/getBill',async(req,res)=>{
-  const {Cookie} =  req.body
-  const cookie = await AuthCookie(Cookie)
-  const Find = await Invoice.findOne({Cookie:cookie})
-   res.json(Find) 
-})
-router.post('/getReceiver',async(req,res)=>{
-  const {Receiver} = req.body
-   const FindUser = await User.findOne({
-     Username: Receiver,
-   });
-   console.log(FindUser)
-   res.json(FindUser)
-})
 module.exports = router;

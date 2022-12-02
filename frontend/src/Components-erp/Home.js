@@ -7,6 +7,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  BarChart,
+  Bar,
   ResponsiveContainer,
   PieChart,
   Pie,
@@ -40,7 +42,7 @@ const data = [
   },
   {
     name: "Page E",
-    uv: 2000,
+    uv: 1890,
     pv: 4800,
     amt: 2181,
   },
@@ -64,19 +66,19 @@ const data = [
   },
 ];
 
-function Home() {
+function Sample() {
   return (
     <>
-      <div className=" ">
+      <div className="ml-42  ">
         <div className="flex">
-          <div className="m-1 p-1 pl-1 bg-blue-300  w-1/4 shadow-2xl">
+          <div className="m-1 p-1  bg-blue-300  w-1/4 shadow-2xl">
             <span className="mt-4">
               <img src="/bubbles.png" alt="" />
             </span>
             <span className="text-white	 text-xl">users</span>
             <br />
             <br />
-            <span className="text-3xl text-white	">720</span>
+            <span className="text-3xl text-white">720</span>
             <br />
             <br />
             <a href="">
@@ -86,14 +88,14 @@ function Home() {
             </a>
           </div>
 
-          <div className="m-1 p-1 pl-1 bg-blue-200 w-1/4 shadow-2xl">
+          <div className="m-1 p-1 bg-blue-200 w-1/4 shadow-2xl">
             <span className="mt-4 ">
               <img src="/bubbles.png" alt="" />
             </span>
-            <span className="text-gray-600 text-xl">Orders</span>
+            <span className="text-xl text-white">Orders</span>
             <br />
             <br />
-            <span className="text-3xl">720</span>
+            <span className="text-3xl text-white">720</span>
             <br />
             <br />
             <a href="">
@@ -103,7 +105,7 @@ function Home() {
             </a>
           </div>
 
-          <div className="p-1 m-1 pl-3 bg-blue-400 w-1/4 shadow-2xl">
+          <div className="p-1 m-1  bg-blue-400 w-1/4 shadow-2xl">
             <span className="mt-4 ">
               <img src="/25268-8-bubbles-photo-thumb.png" alt="" />
             </span>
@@ -119,14 +121,14 @@ function Home() {
               </span>
             </a>
           </div>
-          <div className="p-1 m-1 pl-3 bg-blue-700 w-1/4 shadow-2xl">
+          <div className=" m-1  bg-blue-700 w-1/4 shadow-2xl">
             <span className="mt-4">
               <img src="/25268-8-bubbles-photo-thumb.png" alt="" />
             </span>
             <span className=" text-xl text-white	">Profit</span>
             <br />
             <br />
-            <span className="text-3xl">$72</span>
+            <span className="text-3xl text-white">$72</span>
             <br />
             <br />
             <a href="">
@@ -137,7 +139,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full flex ml-2 ">
+      <div className="w-full flex  h-2/3">
         <div className="w-1/3 mt-8 bg-white-300 border shadow-2xl ">
           <h1 className="text-3xl text-gray-500 ml-28">Total revenue</h1>
           <hr className=" mt-2 " />
@@ -154,10 +156,10 @@ function Home() {
             pariatur, ex commodi voluptatum
           </p>
         </div>
-        <div className="w-2/3 mt-6 ml-8 ">
+        <div className="w-2/3 mt-6 ml-0 ">
           <AreaChart
             width={790}
-            height={400}
+            height={380}
             data={data}
             margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
           >
@@ -196,4 +198,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Sample;

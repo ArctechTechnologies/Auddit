@@ -22,6 +22,7 @@ import { AiOutlinePrinter } from "react-icons/ai";
 import Accounts from "./Accounts";
 import {BiPowerOff} from "react-icons/bi";
 import CreditAccount from "./CreditAccount";
+import { AiOutlineUserAdd } from "react-icons/ai";
 
 function Content(props) {
   const Navigate = useNavigate()
@@ -57,14 +58,23 @@ function Content(props) {
        body: JSON.stringify({ Cookie }),
      });
      const data = await res.json();
-     const { Adress, name, GSTIN, Email } = data;
+     console.log('res',data)
+     const {user,account} = data
+     const { Adress, name, GSTIN, Email } = user;
+     console.log(Adress)
+     const {Transactions} = account
       console.log( 'Adress', Adress)
       console.log( 'GSTIN', GSTIN)
       console.log( 'Email', Email)
+      console.log("name", name);
      localStorage.setItem('Username',JSON.stringify(name))
      localStorage.setItem('Adress',JSON.stringify(Adress))
      localStorage.setItem('GSTIN',JSON.stringify(GSTIN))
      localStorage.setItem('Email',JSON.stringify(Email))
+     localStorage.setItem("name", JSON.stringify(name));
+     localStorage.setItem('Transactions',JSON.stringify(Transactions))
+     localStorage.setItem("Accounts", JSON.stringify(account));
+
    };
    useEffect(() => {
     console.log('set')
@@ -112,8 +122,9 @@ const promtClose=()=>{
     //  document.cookie = 'logincookie' + ";max-age=0";
     // const log =  await  props.promt()
     // if(log === 'yes'){
-
+    
     jsCookie.remove("loginCookie");
+    localStorage.clear()
     Navigate("/login");
     window.alert("Logged Out");
     window.location.reload();
@@ -123,7 +134,7 @@ const promtClose=()=>{
   };
   return (
     <>
-      <div className="flex   bg-slate-200 h-fit  w-full    relative  ">
+      <div className="flex   bg-white h-fit  w-full    relative  ">
         <div className="">
           <Navbar promt={promt} />
         </div>
@@ -140,10 +151,10 @@ const promtClose=()=>{
               X
             </div>
             <div className="text-center font-bold text-2xl  ">MESSAGE</div>
-              <br></br>
-               <div className="text-lg font-bold ">{`${Promt}`}</div>
-              <br></br>
-               <div className=" grid col-span-2 gap-5">
+            <br></br>
+            <div className="text-lg font-bold ">{`${Promt}`}</div>
+            <br></br>
+            <div className=" grid col-span-2 gap-5">
               <button
                 className="bg-blue-600 text-white pl-5 pr-5 pt-2 pb-2 rounded-lg   hover:bg-blue-700"
                 onClick={() => {
@@ -167,7 +178,7 @@ const promtClose=()=>{
           className={`absolute ml-56 z-40 w-5/6 h-screen bg-white/75 blur-lg grid justify-items-center items-center ${PromtScale} `}
         ></div>
         <div className={`  h-screen   bg-inherit `}>
-          <div className="absolute w-16  h-screen bg-white shadow-sm shadow-black right-0   ">
+          <div className="absolute w-14   h-screen bg-white shadow-sm shadow-black right-0   ">
             <div className="m-2 mt-18  gap-4  h-5/6  justify-items-center">
               <div
                 className=" p-2  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
@@ -184,64 +195,32 @@ const promtClose=()=>{
                 }}
               >
                 <div>{<BiPowerOff size={40} />}</div>
+              </div>{" "}
+              <div
+                className=" p-2  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
+                onClick={() => {
+                  Navigate('/AddDemoClient');
+                }}
+              >
+                <div>{<AiOutlineUserAdd size={40} />}</div>
               </div>
             </div>
           </div>
           {/* Main workspace */}
-          <div className="bg-white  w-5/6  ml-3  h-5/6  mt-2  top-2 absolute shadow-sm shadow-black  overflow-auto   ">
+          <div className="bg-white ml-1  w-5/6 absolute   h-fit  mt-2     overflow-auto   ">
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
               <Route exact path="/Account" element={<Accounts />}></Route>
-              <Route exact path="/CreditAccount" element={<CreditAccount />}></Route>
               <Route
                 exact
-                path="/invoices"
-                element={
-                  <Invoice
-                    self={Self}
-                    SelfAdress={SelfAdress}
-                    SelfGSTIN={SelfGSTIN}
-                    getData={getData}
-                  />
-                }
+                path="/CreditAccount"
+                element={<CreditAccount />}
               ></Route>
-              <Route
-                exact
-                path="Print"
-                element={
-                  <PrintInvoices
-                    self={Self}
-                    SelfAdress={SelfAdress}
-                    SelfGSTIN={SelfGSTIN}
-                    getData={getData}
-                    print={print}
-                  />
-                }
-              ></Route>
-              <Route
-                path="Transactions"
-                element={
-                  <Transactions
-                    self={Self}
-                    SelfAdress={SelfAdress}
-                    SelfGSTIN={SelfGSTIN}
-                    getData={getData}
-                    print={print}
-                  />
-                }
-              ></Route>
+              <Route exact path="/invoices" element={<Invoice />}></Route>
+              <Route exact path="Print" element={<PrintInvoices />}></Route>
+              <Route path="Transactions" element={<Transactions />}></Route>
 
-              <Route
-                path="/"
-                element={
-                  <Home
-                    self={Self}
-                    SelfAdress={SelfAdress}
-                    SelfGSTIN={SelfGSTIN}
-                    getData={getData}
-                  />
-                }
-              ></Route>
+              <Route path="/" element={<Home />}></Route>
             </Routes>
           </div>
         </div>
