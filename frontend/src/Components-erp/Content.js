@@ -23,6 +23,7 @@ import Accounts from "./Accounts";
 import {BiPowerOff} from "react-icons/bi";
 import CreditAccount from "./CreditAccount";
 import { AiOutlineUserAdd } from "react-icons/ai";
+import AddaDemoClient from "./AddaDemoClient";
 
 function Content(props) {
   const Navigate = useNavigate()
@@ -199,7 +200,7 @@ const promtClose=()=>{
               <div
                 className=" p-2  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
                 onClick={() => {
-                  Navigate('/AddDemoClient');
+                  Navigate("/AddDemoClient");
                 }}
               >
                 <div>{<AiOutlineUserAdd size={40} />}</div>
@@ -211,6 +212,7 @@ const promtClose=()=>{
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
               <Route exact path="/Account" element={<Accounts />}></Route>
+              <Route exact path="/AddDemoClient" element={<AddaDemoClient />}></Route>
               <Route
                 exact
                 path="/CreditAccount"

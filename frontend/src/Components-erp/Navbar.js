@@ -49,7 +49,7 @@ function Navbar(props) {
     }
   },)
   const Get=async()=>{
-    const nam = localStorage.getItem("Username");
+    const nam = localStorage.getItem("name");
     const nae = JSON.parse(nam);
     setname(nae);
   }

@@ -322,10 +322,35 @@ router.post("/getReceiver", async (req, res) => {
 });
 
 router.post('/addDemoClient',async(req,res)=>{
-   const { name, GSTIN, Adress, Username, Email, Type,Cookie } = req.body;
-    const cookie = AuthCookie(Cookie)
-    const addClient = await Account.findOneAndUpdate({Cookie:cookie},{$push:{Username:Username,Name:name,Debitor:0,Creditor:0}})
-    const addParty = await Account.findOneAndUpdate({Cookie:cookie},{$push:{Username,Name:name,GSTIN:GSTIN,Adress:Adress,Email:Email,Type:false}})
+     const {user,Cookie} = req.body
+   const { name, GSTIN, Adress, Username, Email, Type } =  user
+   console.log(name)
+   const cookie = await AuthCookie(Cookie)
+   const  AuthClient = await Account.findOne({Cookie:cookie})
+      const Client = {
+        Username: Username,
+        Name: name,
+        Debitor: 0,
+        Creditor: 0,
+        party: false,
+      };
+      const Party = {
+        Username:Username,
+        Name: name,
+        GSTIN: GSTIN,
+        Adress: Adress,
+        Email: Email,
+        Type: Type,
+      };
+     const addClient = await Account.findOneAndUpdate({Cookie:cookie},{$push:{Client:Client}})
+    //  console.log(addClient)
+    // res.json(addClient)
+     const addParty = await Account.findOneAndUpdate({Cookie:cookie},{$push:{party:Party}})
+     if(!addClient||!addParty){
+      res.json('failed')
+     }else{
+      res.json('Sucessfull')
+     }
       
 })
 
