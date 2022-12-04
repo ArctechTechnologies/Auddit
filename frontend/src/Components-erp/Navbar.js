@@ -5,6 +5,7 @@ import GetRequest from "./GetRequest";
 import GetDetails from "./GetDetails";
 import { useEffect } from "react";
 import {  AiTwotonePrinter } from "react-icons/ai";
+
 function Navbar(props) {
   const Navigate = useNavigate()
   let Details;
@@ -15,6 +16,7 @@ function Navbar(props) {
   const [hoverScale, sethoverScale] = useState("");
   const [enableHover, setenableHover] = useState("");
   const [name, setname] = useState("");
+  const [Edition, setEdition] = useState('')
   // const  = () => {
   //   if (navwidth === "w-52") {
   //     setnavwidth("w-14");
@@ -41,17 +43,23 @@ function Navbar(props) {
   };
 
   let effectCount = 0;
-  useEffect(() => {
-    if(effectCount===0){
-
-      console.log('asd')
-      Get()
-    }
+  useEffect (() => {
+     Get()
   },)
   const Get=async()=>{
-    const nam = localStorage.getItem("name");
-    const nae = JSON.parse(nam);
-    setname(nae);
+    const aaa=()=>{
+
+      const nam = localStorage.getItem("name");
+      const nae = JSON.parse(nam);
+      setname(nae);
+      console.log('nae',name)
+      const ty = localStorage.getItem("Type")
+      const typ = JSON.parse(ty)
+      
+      setEdition(typ)
+
+    }
+    await aaa()
   }
 
   return (
@@ -59,13 +67,21 @@ function Navbar(props) {
       <div
         className={`min-h-full ${navwidth}   bg-slate-900   group    ${enableHover} transition-all border-r-gray-500 border-r-2 `}
       >
-        <div className="border-b-2 border-white mb-5">
+        <div
+          className="border-b-2 border-white mb-5 hover:cursor-pointer "
+          onClick={() => {
+            Navigate("/profile");
+          }}
+        >
           <div className="p-5 text-md text-white">{`${name}`}</div>
         </div>
-        <div className="text-white w-44 text-center text-xl absolute bottom-5">
-          AUDDIT
+        <div className="text-white w-44 text-center text-xl absolute bottom-5 ">
+          <div className="text-xl">AUDDIT</div>
+          <div className="text-sm  text-center w-full   grid  grid-col-2 justify-items-center">
+            <div className="pl- pr-1">{`${Edition}`}</div>
+            <div>Edition</div>
+          </div>
         </div>
-   
 
         <div className="bg-transparent ">
           {/* {home button} */}

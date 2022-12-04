@@ -58,11 +58,35 @@ function Login(props) {
      }else{
        console.log('login')
         jsCookie.set('loginCookie',res)
-       
-
-        
-         
           window.alert('login SucessFull')
+ const cookie = jsCookie.get();
+ const { loginCookie } = cookie;
+ const Cookie = loginCookie;
+ const result = await fetch("/getdata", {
+   method: "POST",
+   headers: { "Content-Type": "application/json" },
+   body: JSON.stringify({ Cookie }),
+ });
+ const data = await result.json();
+ console.log("res", data);
+ const { user, account } = data;
+ const { Adress, name, GSTIN, Email,Type } = user;
+ console.log(Adress);
+ const { Transactions } = account;
+ console.log("Adress", Adress);
+ console.log("GSTIN", GSTIN);
+ console.log("Email", Email);
+ console.log("name", name);
+ localStorage.setItem("Username", JSON.stringify(name));
+ localStorage.setItem("Adress", JSON.stringify(Adress));
+ localStorage.setItem("GSTIN", JSON.stringify(GSTIN));
+ localStorage.setItem("Email", JSON.stringify(Email));
+ localStorage.setItem("name", JSON.stringify(name));
+ localStorage.setItem("Type", JSON.stringify(Type));
+ localStorage.setItem("Transactions", JSON.stringify(Transactions));
+ localStorage.setItem("Accounts", JSON.stringify(account));
+
+
          Navigate('/')
            document.location.reload()  // to be changed later to main dashboard 
      }

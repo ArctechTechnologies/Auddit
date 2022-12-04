@@ -8,10 +8,16 @@ const AccountSchema = new mongoose.Schema({
   name: { type: String },
   Cash: [],
   CashInHand: [{}],
-  Debitor: [{}],
+  Debitor: 
+    {
+      TotalDebitor: { },
+      invoices: [{
+
+      }],
+    },
   Creditor: {
     TotalCreditor: { type: Number },
-    invoices: [],
+    invoices: [{}],
   },
   Invoice: {
     invocieNo: { type: Number },

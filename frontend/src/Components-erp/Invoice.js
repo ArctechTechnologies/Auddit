@@ -181,6 +181,7 @@ effectCount++
   }
 const appendSearch=async(id,value)=>{              //function to created search panel for b & shipped to
   let Element;
+    console.log(value)
     const res = await fetch("/Search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -265,15 +266,15 @@ const selectValue=(e)=>{          //function to  set both values of b & shipped 
     invoice.shift()
    
     console.log(invoice)
-     const cookie = jsCookie.get()
-    const {loginCookie}= cookie
-    const Cookie = loginCookie
+     const Cookie = jsCookie.get()
+    const {loginCookie}= Cookie
+    const cookie = loginCookie
    const status = 'not paid'
    const Type = 'send'
     const res = await fetch("/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ invoice,Cookie,SGST,CGST,GrandTotal,BilledTo,ShippedTo,Name,status,Type }),
+      body: JSON.stringify({ invoice,cookie,SGST,CGST,GrandTotal,BilledTo,ShippedTo,Name,status,Type }),
     })
       const result =  await res.json()
   if(result==='probleum'){

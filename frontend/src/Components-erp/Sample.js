@@ -1,168 +1,182 @@
-import React from 'react'
+import React from "react";
 
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Sector, Cell, } from 'recharts';
-const data = [
-    {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-    },
-    {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
-    },
-    {
-        name: 'Page h',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-    },
+const productdata = [
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
+  {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  },
 ];
 
+// const profiledata = () => {
+//   const nam = localStorage.getItem("Username");
+//   const name = JSON.parse(nam);
+//   const Adres = localStorage.getItem("Adress");
+//   const Adress = JSON.parse(Adres)
+//   const Emai = localStorage.getItem("Email");
+//   const Email = JSON.parse(Emai)
+//   const GSTI = localStorage.getItem("GSTIN");
+//   const GSTIN = JSON.parse(GSTI)
+//   console.log(name);
+// };
 
 function Sample() {
+  return (
+    <>
+    <div className="overflow-auto h-screen">
 
-    return (
-        <>
-            <div className="ml-50 p-1 ">
-                <div className="flex">
-                    <div className="m-1 p-1 pl-1 bg-blue-300  w-1/4 shadow-2xl">
-                        <span className="mt-4"><img src="/bubbles.png"
-                            alt="" /></span>
-                        <span className="text-white	 text-xl">users</span>
-                        <br />
-                        <br />
-                        <span className="text-3xl text-white	">720</span>
-                        <br /><br />
-                        <a href="" ><span
-                            className="underline decoration-dotted font-extralight underline-offset-2 cursor-pointer hover:text-gray-600 text-white	">see
-                            all
-                            user</span></a>
-                    </div>
-
-                    <div className="m-1 p-1 pl-1 bg-blue-200 w-1/4 shadow-2xl" >
-                        <span className="mt-4 "><img src="/bubbles.png"
-                            alt="" /></span>
-                        <span className="text-gray-600 text-xl">Orders</span>
-                        <br />
-                        <br />
-                        <span className="text-3xl">720</span>
-                        <br /><br />
-                        <a href="" ><span
-                            className="underline decoration-dotted font-extralight underline-offset-2 cursor-pointer hover:text-gray-600 text-white	">see
-                            all
-                            Orders</span></a>
-                    </div>
-
-
-                    <div className="p-1 m-1 pl-3 bg-blue-400 w-1/4 shadow-2xl">
-                        <span className="mt-4 "><img
-                            src="/25268-8-bubbles-photo-thumb.png" alt="" /></span>
-                        <span className=" text-xl text-white	">Earning</span>
-                        <br />
-                        <br />
-                        <span className="text-3xl text-white	">$72</span>
-                        <br /><br />
-                        <a href=""><span
-                            className="underline decoration-dotted font-extralight underline-offset-2 cursor-pointer hover:text-gray-600 text-white	">view
-                            net
-                            earning</span></a>
-                    </div>
-                    <div className="p-1 m-1 pl-3 bg-blue-700 w-1/4 shadow-2xl">
-                        <span className="mt-4"><img
-                            src="/25268-8-bubbles-photo-thumb.png" alt="" /></span>
-                        <span className=" text-xl text-white	">Profit</span>
-                        <br />
-                        <br />
-                        <span className="text-3xl">$72</span>
-                        <br /><br />
-                        <a href=""><span
-                            className="underline decoration-dotted font-extralight underline-offset-2 cursor-pointer hover:text-gray-600 text-white	">view
-                            Net Profit
-                        </span></a>
-                    </div>
-                </div>
-
+      <div className="w-full flex font-medium ">
+        <div className="w-1/4 ml-2 border-2 outline m-4 mr-2">
+          <img className="w-full " src="logo.png" alt="" />
+        </div>
+        <div className=" m-4 mr-6 w-3/4 h-80 border   p-4">
+          <div className="mt-4 ml-2 flex ">
+            <div className="-mt-8 h-80 -ml-8 pl-4 bg-violet-900 text-white">
+              <span className="mr-20  underline">Businesses Name :</span>
+              <br />
+              <br />
+              <span className="mr-40 underline ">Adress:</span>
+              <br />
+              <br />
+              <span className="mr-40 underline">Email :</span>
+              <br />
+              <br />
+              <span className="mr-40 underline">GSTIN :</span>
+              <br />
+              <br />
+              <span className="mr-24 underline">Businesses Type :</span>
+              <br />
+              <br />
+              <span className="mr-40 underline"> Contact :</span>
+              <br />
+              <br />
             </div>
-            <div className="w-full flex ml-2 ">
-                <div className="w-1/3 mt-8 bg-white-300 border shadow-2xl ">
-                    <h1 className="text-3xl text-gray-500 ml-28">Total
-                        revenue</h1>
-                    <hr className=" mt-2 " />
-                    <div className="featuredChart">
-
-
-                    </div>
-                    <p className="text-center"> <span className="text-3xl">Total Sale Made Today</span>
-                        <br />
-                        <br />
-                        <span className="text-3xl">$710</span>
-                    </p>
-                    <p className="text-center ">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, pariatur, ex commodi voluptatum
-                    </p>
-                </div>
-                <div className="w-2/3 mt-6 ml-8 " >
-                    <AreaChart width={790} height={400} data={data}
-                        margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-                        <defs>
-                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                            </linearGradient>
-                            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-                                <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-                            </linearGradient>
-                        </defs>
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="uv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                        <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
-                    </AreaChart>
-                </div>
-
+            <div className="-mt-8 h-80  pl-4  text-black w-full bg-stone-100">
+              <span className="text-l  p-2">
+                {JSON.parse(localStorage.getItem("Username"))}
+              </span>
+              <br />
+              <br />
+              <span className="text-l  p-2 ">
+                {JSON.parse(localStorage.getItem("Adress"))}
+              </span>
+              <br />
+              <br />
+              <span className="text-l  p-2 ">
+                {" "}
+                {JSON.parse(localStorage.getItem("Email"))}
+              </span>
+              <br />
+              <br />
+              <span className="text-l  p-2 ">
+                {" "}
+                {JSON.parse(localStorage.getItem("GSTIN"))}
+              </span>
+              <br />
+              <br />
+              <span className="text-l  p-2 ">
+                fewrfw{JSON.parse(localStorage.getItem(""))}
+              </span>
+              <br />
+              <br />
+              <span className="text-l  p-2 ">
+                rwegewg{JSON.parse(localStorage.getItem(""))}
+              </span>
+              <br />
+              <br />
             </div>
-
-
-        </>
-    )
+          </div>
+        </div>
+      </div>
+      <div className=" h-3/6 overflow-auto">
+        <div className="w-full  items-center justify-center flex flex-wrap">
+          {productdata.map((product, i) => (
+              <div className="w-1/5 border outline-black  m-4 shadow shadow-black bg-white-900 text-black">
+              <img className=" p-auto mb-1" src={`${product.image}`} alt="img" />
+              <br />
+              <br />
+              <span className=" px-20 text-l text-grey-300">
+                {product.Productname}
+              </span>
+              <br />
+              <span className=" px-20 text-xl">{product.Price}</span>
+              <br />
+              <br />
+              <button className="bg-blue-900 w-24 text-white ml-16 hover:bg-sky-700 mb-1">
+                Click
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+          </div>
+    </>
+  );
 }
 
-
-export default Sample
+export default Sample;

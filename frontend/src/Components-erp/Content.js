@@ -24,6 +24,12 @@ import {BiPowerOff} from "react-icons/bi";
 import CreditAccount from "./CreditAccount";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import AddaDemoClient from "./AddaDemoClient";
+import Sample from "./Sample";
+import ChooseSearch from "./ChooseSearch";
+import Profile from "./profile";
+import SearchUser from "./SearchUser";
+import UserProfile from "./UserProfile";
+
 
 function Content(props) {
   const Navigate = useNavigate()
@@ -49,40 +55,6 @@ function Content(props) {
     }
   };
  
-   const getData = async () => {
-     const cookie = jsCookie.get();
-     const { loginCookie } = cookie;
-     const Cookie = loginCookie;
-     const res = await fetch("/getdata", {
-       method: "POST",
-       headers: { "Content-Type": "application/json" },
-       body: JSON.stringify({ Cookie }),
-     });
-     const data = await res.json();
-     console.log('res',data)
-     const {user,account} = data
-     const { Adress, name, GSTIN, Email } = user;
-     console.log(Adress)
-     const {Transactions} = account
-      console.log( 'Adress', Adress)
-      console.log( 'GSTIN', GSTIN)
-      console.log( 'Email', Email)
-      console.log("name", name);
-     localStorage.setItem('Username',JSON.stringify(name))
-     localStorage.setItem('Adress',JSON.stringify(Adress))
-     localStorage.setItem('GSTIN',JSON.stringify(GSTIN))
-     localStorage.setItem('Email',JSON.stringify(Email))
-     localStorage.setItem("name", JSON.stringify(name));
-     localStorage.setItem('Transactions',JSON.stringify(Transactions))
-     localStorage.setItem("Accounts", JSON.stringify(account));
-
-   };
-   useEffect(() => {
-    console.log('set')
-     
-     getData()
-    
-   }, [])
    
 const print = () => {
   console.log("inn");
@@ -200,7 +172,7 @@ const promtClose=()=>{
               <div
                 className=" p-2  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
                 onClick={() => {
-                  Navigate("/AddDemoClient");
+                  Navigate("/Search");
                 }}
               >
                 <div>{<AiOutlineUserAdd size={40} />}</div>
@@ -208,11 +180,15 @@ const promtClose=()=>{
             </div>
           </div>
           {/* Main workspace */}
-          <div className="bg-white ml-1  w-5/6 absolute   h-fit  mt-2     overflow-auto   ">
+          <div className="bg-white ml-1  w-5/6 absolute   h-fit       overflow-auto   ">
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
               <Route exact path="/Account" element={<Accounts />}></Route>
-              <Route exact path="/AddDemoClient" element={<AddaDemoClient />}></Route>
+              <Route
+                exact
+                path="/AddDemoClient"
+                element={<AddaDemoClient />}
+              ></Route>
               <Route
                 exact
                 path="/CreditAccount"
@@ -221,6 +197,11 @@ const promtClose=()=>{
               <Route exact path="/invoices" element={<Invoice />}></Route>
               <Route exact path="Print" element={<PrintInvoices />}></Route>
               <Route path="Transactions" element={<Transactions />}></Route>
+              <Route path="Search" element={<ChooseSearch />}></Route>
+              <Route path="sample" element={<Sample />}></Route>
+              <Route path="profile" element={<Profile />}></Route>
+              <Route path="searchUsers" element={<SearchUser />}></Route>
+              <Route path="UserProfile" element={<UserProfile />}></Route>
 
               <Route path="/" element={<Home />}></Route>
             </Routes>
