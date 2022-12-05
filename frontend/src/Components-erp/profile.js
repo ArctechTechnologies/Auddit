@@ -85,7 +85,7 @@ const productdata = [
 //   console.log(name);
 // };
 
-function profile() {
+function Sample() {
   return (
     <>
       <div className="overflow-auto h-screen">
@@ -95,23 +95,23 @@ function profile() {
           </div>
           <div className=" m-4 mr-6 w-3/4 h-80 border   p-4">
             <div className="mt-4 ml-2 flex ">
-              <div className="-mt-8 h-80 -ml-8 pl-4 bg-violet-900 text-white">
-                <span className="mr-20  underline">Businesses Name :</span>
+              <div className="-mt-8 h-80 -ml-8 pl-4 bg-stone-100 ">
+                <span className="mr-20  ">Businesses Name :</span>
                 <br />
                 <br />
-                <span className="mr-40 underline ">Adress:</span>
+                <span className="mr-40  ">Adress:</span>
                 <br />
                 <br />
-                <span className="mr-40 underline">Email :</span>
+                <span className="mr-40 ">Email:</span>
                 <br />
                 <br />
-                <span className="mr-40 underline">GSTIN :</span>
+                <span className="mr-40 ">GSTIN:</span>
                 <br />
                 <br />
-                <span className="mr-24 underline">Businesses Type :</span>
+                <span className="mr-24 ">Businesses Type:</span>
                 <br />
                 <br />
-                <span className="mr-40 underline"> Contact :</span>
+                <span className="mr-40 "> Contact:</span>
                 <br />
                 <br />
               </div>
@@ -147,7 +147,15 @@ function profile() {
                   rwegewg{JSON.parse(localStorage.getItem(""))}
                 </span>
                 <br />
-                <br />
+
+                <div className="w-full grid justify-items-center">
+                  <button
+                    className="  relative right-3  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    onClick={() => {}}
+                  >
+                    Edit Profile
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -161,18 +169,24 @@ function profile() {
                   src={`${product.image}`}
                   alt="img"
                 />
-                <br />
-                <br />
+               
                 <span className=" px-20 text-l text-grey-300">
                   {product.Productname}
                 </span>
                 <br />
                 <span className=" px-20 text-xl">{product.Price}</span>
                 <br />
-                <br />
-                <button className="bg-blue-900 w-24 text-white ml-16 hover:bg-sky-700 mb-1">
-                  Click
-                </button>
+
+                <div className="w-full grid justify-items-center">
+                  <button
+                    className="  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    onClick={() => {
+                      
+                    }}
+                  >
+                    Edit 
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -182,4 +196,4 @@ function profile() {
   );
 }
 
-export default profile;
+export default Sample;

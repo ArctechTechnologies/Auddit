@@ -27,9 +27,11 @@ function SearchUser() {
         array.push(index)
     })
     const open=(e)=>{
-   const j = e.target.id[0]
-   const value = array[j].Username;
+   let j = e.target.id[0]
+
+   const value = array[--j].Username;
     localStorage.setItem('find',JSON.stringify(value))
+    Navigate('/userProfile')
 
     }
 
@@ -68,6 +70,7 @@ function SearchUser() {
                         case 5:
                          createdTd.innerText = 'view'
                             createdTd.addEventListener('click',(e)=>{open(e)}) 
+                            createdTd.setAttribute('style','cursor:pointer;color:blue')
                             break;
 
            }

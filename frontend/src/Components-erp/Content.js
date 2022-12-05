@@ -148,7 +148,7 @@ const promtClose=()=>{
           </div>
         </div>
         <div
-          className={`absolute ml-56 z-40 w-5/6 h-screen bg-white/75 blur-lg grid justify-items-center items-center ${PromtScale} `}
+          className={`absolute ml-56 z-40 w-5/6 h-screen overflow-auto bg-white/75 blur-lg grid justify-items-center items-center ${PromtScale} `}
         ></div>
         <div className={`  h-screen   bg-inherit `}>
           <div className="absolute w-14   h-screen bg-white shadow-sm shadow-black right-0   ">

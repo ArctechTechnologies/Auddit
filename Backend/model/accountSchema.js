@@ -6,29 +6,21 @@ const AccountSchema = new mongoose.Schema({
   Username: { type: String },
   Cookie: { type: String },
   name: { type: String },
-  Cash: [],
-  CashInHand: [{}],
-  Debitor: 
-    {
-      TotalDebitor: { },
-      invoices: [{
+  Cash: {type:Number},
+  CashInHand: {type:Number},
+  CashInBank:{type:Number},
+TotalDebitor: {type:Number },
 
-      }],
-    },
-  Creditor: {
-    TotalCreditor: { type: Number },
-    invoices: [{}],
-  },
-  Invoice: {
-    invocieNo: { type: Number },
-    Creditor: { type: Number },
-    Debitor: { type: Number },
-  },
+TotalCreditor: { type: Number },
+    
+  
+ 
+
   Transactions: [{}],
   Cookie: { type: String },
   party: [
     {
-      Username: { type: String },
+      Username: { type: String }, 
       Name: { type: String },
       GSTIN: { type: String },
       Adress: { type: String },
@@ -41,8 +33,8 @@ const AccountSchema = new mongoose.Schema({
       Username: { type: String },
       Name: { type: String },
       party: { type: Boolean },
-      Creditor: { type: Number },
-      Debitor: { type: Number },
+      Credit: { type: Number },
+      Debit: { type: Number },
     },
   ],
   others: {},

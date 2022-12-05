@@ -49,7 +49,7 @@ router.post("/create", async (req, res) => {
    const {Creditor} = User
    const {TotalCreditor} = Creditor
      let Credit = 0
-     Credit = Credit + totalcreditor+GrandTotal;
+     Credit = Credit + TotalCreditor+GrandTotal;
      console.log(Credit)
     console.log(Client)
    Client.map((index)=>{
@@ -129,7 +129,14 @@ router.post("/Register", async (req, res) => {
           Invoice: [{}],
         };
         const result = await use.save();
-        const createAccount = await new Account({ Username,Creditor,Debitor });
+        const createAccount = await new Account({
+          Username,
+          TotalCreditor: 0,
+          TotalDebitor: 0,
+          Cash:0,
+          CashInHand:0,
+          CashInBank:0,
+        });
       
           const createdAccount = await createAccount.save()
 
@@ -325,6 +332,40 @@ router.post('/addDemoClient',async(req,res)=>{
       res.json('Sucessfull')
      }
       
+})
+
+router.post('/addClient',async(req,res)=>{
+  const {Cookie,Username} = req.body
+  // console.log(name);
+  const cookie = await AuthCookie(Cookie);
+
+  const findClient  = await User.findOne({Username:Username})
+   const {name,Type}  =  findClient
+     const Client = {
+       Username: Username,
+       Name: name,
+       Debit: 0,
+       Credit: 0,
+       party: true,
+     };
+    
+     const addClient = await Account.findOneAndUpdate(
+       { Cookie: cookie },
+       { $push: { Client: Client } }
+     );
+     //  console.log(addClient)
+     // res.json(addClient)
+     const addParty = await Account.findOneAndUpdate(
+       { Username: Username },
+       { $push: { Client: Client } }
+     );
+     if (!addClient || !addParty) {
+       res.json("failed");
+     } else {
+       res.json("Sucessfull");
+     }
+   
+
 })
 
 
