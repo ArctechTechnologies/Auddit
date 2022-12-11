@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react'
+
 
 import {
   AreaChart,
@@ -198,4 +199,4 @@ function Sample() {
   );
 }
 
-export default Sample;
+export default Sample

@@ -20,7 +20,7 @@ import jsCookie from "js-cookie";
 import { useEffect } from "react";
 import { AiOutlinePrinter } from "react-icons/ai";
 import Accounts from "./Accounts";
-import {BiPowerOff} from "react-icons/bi";
+import { BiPowerOff } from "react-icons/bi";
 import CreditAccount from "./CreditAccount";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import AddaDemoClient from "./AddaDemoClient";
@@ -29,6 +29,7 @@ import ChooseSearch from "./ChooseSearch";
 import Profile from "./profile";
 import SearchUser from "./SearchUser";
 import UserProfile from "./UserProfile";
+import ProductCatalog from "./ProductCatalog";
 
 
 function Content(props) {
@@ -36,7 +37,7 @@ function Content(props) {
   const [contentMargin, setcontentMargin] = useState("ml-56");
   const [PromtYes, setPromtYes] = useState('')
   const [PromtNo, setPromtNo] = useState('')
- 
+
   const [Receiver, setReceiver] = useState("");
   const [ReceiverAdress, setReceiverAdress] = useState("");
   const [ReceiverGSTIN, setReceiverGSTIN] = useState("");
@@ -54,48 +55,48 @@ function Content(props) {
       setcontentMargin("ml-56");
     }
   };
- 
-   
-const print = () => {
-  console.log("inn");
-  var printContents = document.getElementById("printDiv");
-  if(!printContents){
-    var  x = 'cannot print on this Page'
-    const fun =  promt(x)
-    if(fun==='yes'){
-      print()
-    }else{
 
+
+  const print = () => {
+    console.log("inn");
+    var printContents = document.getElementById("printDiv");
+    if (!printContents) {
+      var x = 'cannot print on this Page'
+      const fun = promt(x)
+      if (fun === 'yes') {
+        print()
+      } else {
+
+      }
+    } else {
+
+      var originalContents = document.body.innerHTML;
+
+      document.body.innerHTML = printContents.innerHTML;
+
+      window.print();
+
+      document.location.reload();
+      document.body.innerHTML = originalContents;
     }
-  }else{
+  };
 
-    var originalContents = document.body.innerHTML;
-    
-    document.body.innerHTML = printContents.innerHTML;
-    
-    window.print();
-    
-    document.location.reload();
-    document.body.innerHTML = originalContents;
+  const promt = async (x) => {
+
+    const aaa = x
+    setPromt(aaa)
+    setPromtScale('scale-100')
   }
-};
+  const promtClose = () => {
 
-const promt=async(x)=>{
+    setPromtScale('scale-0')
 
-   const aaa = x
-   setPromt(aaa)
-  setPromtScale('scale-100') 
-}
-const promtClose=()=>{
-
-  setPromtScale('scale-0')
-
-}
+  }
   const logout = async () => {
     //  document.cookie = 'logincookie' + ";max-age=0";
     // const log =  await  props.promt()
     // if(log === 'yes'){
-    
+
     jsCookie.remove("loginCookie");
     localStorage.clear()
     Navigate("/login");
@@ -202,6 +203,7 @@ const promtClose=()=>{
               <Route path="profile" element={<Profile />}></Route>
               <Route path="searchUsers" element={<SearchUser />}></Route>
               <Route path="UserProfile" element={<UserProfile />}></Route>
+              <Route path="ProductCatalog" element={<ProductCatalog />}></Route>
 
               <Route path="/" element={<Home />}></Route>
             </Routes>
