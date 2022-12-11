@@ -83,11 +83,11 @@ function Navbar(props) {
           </div>
         </div>
 
-        <div className="bg-transparent ">
+        <div className="bg-transparent  font-extralight">
           {/* {home button} */}
           <Link to={"/"}>
-            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1 ">
-              <div className=" w-16 place-items-center   ">
+            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1 hover:bg-purple-500 ">
+              <div className=" w-12 place-items-center   ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-10 w-10"
@@ -98,16 +98,16 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold text-sm hover:text-blue-600  ${scaller}  ${hoverScale}  `}
+                className={`text-white grid justify-items-center items-center text-sm   ${scaller}  ${hoverScale}  `}
               >
-                Home
+              <div>Home</div>
               </div>
             </div>
           </Link>
           {/* 2 btn accounts */}
           <Link to="/Account">
-            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4  ">
-              <div className=" w-16 place-items-center  ">
+            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4 hover:bg-purple-500 ">
+              <div className=" w-12 place-items-center  ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-10 w-10"
@@ -122,16 +122,16 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold text-sm hover:text-blue-600  ${scaller}   ${hoverScale}    `}
+                className={`text-white grid justify-items-center items-center text-sm   ${scaller}  ${hoverScale}  `}
               >
-                Accounts
+              <div>Accounts</div>
               </div>
             </div>
           </Link>
           {/* 3 btn     statements  */}
           <Link to="/invoices">
-            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4 ">
-              <div className=" w-16 place-items-center  ">
+            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4 hover:bg-purple-500">
+              <div className=" w-12 place-items-center  ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-10 w-10"
@@ -147,15 +147,15 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold mt-2 text-sm hover:text-blue-600  ${scaller} ${hoverScale}   `}
+                className={`text-white grid justify-items-center items-center text-sm   ${scaller}  ${hoverScale}  `}
               >
-                Bill
+              <div>Create Invoice +</div>
               </div>
             </div>
           </Link>
           <Link to="/Print">
-            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4 ">
-              <div className=" w-16 place-items-center   ">
+            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4  hover:bg-purple-500">
+              <div className=" w-12 place-items-center   ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-10 w-10"
@@ -166,15 +166,15 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold mt-2 text-sm hover:text-blue-600  ${scaller} ${hoverScale}  `}
+                className={`text-white grid justify-items-center items-center text-sm   ${scaller}  ${hoverScale}  `}
               >
-                PrintInvoice
+              <div>Invoices</div>
               </div>
             </div>
           </Link>
           <Link to="/Transactions">
-            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4 ">
-              <div className=" w-16 place-items-center  ">
+            <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4 hover:bg-purple-500">
+              <div className=" w-12 place-items-center  ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-10 w-10  "
@@ -189,9 +189,9 @@ function Navbar(props) {
                 </svg>
               </div>
               <div
-                className={`text-white text-center font-semibold mt-2 text-sm hover:text-blue-600  ${scaller} ${hoverScale}  `}
+                className={`text-white grid justify-items-center items-center text-sm   ${scaller}  ${hoverScale}  `}
               >
-                Transactions
+              <div>Home</div>
               </div>
             </div>
           </Link>

@@ -29,7 +29,17 @@ const userSchema = new mongoose.Schema({
     Type:{
         type:String,
        
-    },  
+    }, 
+    
+    Products:[
+    {
+      Name:{type:String},
+      Price:{type:String},
+      Image:{type:String},
+      Description:{type:String}
+    }
+    ] ,
+
     Cookie:{
         type:String
     }  

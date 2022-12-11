@@ -44,15 +44,13 @@ router.post("/create", async (req, res) => {
    console.log(BilledTo)
    let party = false;
    let client = true;
+   
    const  user = await Account.findOne({Cookie:cokie})
-   const {Client} = user;
-   const {Creditor} = User
-   const {TotalCreditor} = Creditor
-     let Credit = 0
-     Credit = Credit + TotalCreditor+GrandTotal;
-     console.log(Credit)
-    console.log(Client)
-   Client.map((index)=>{
+     const {Client,TotalCreditor}  = user
+            console.log(TotalCreditor)
+        let newCredit = 0;
+        newCredit = newCredit + TotalCreditor +GrandTotal;
+     Client.map((index)=>{
      if(BilledTo===index.Username){
       current = true
       if(index.party===true){
@@ -64,17 +62,16 @@ router.post("/create", async (req, res) => {
     })
     if(current===true){
         if(party===true){
-          const getCreditor = await Account.findOne({Username:BilledTo})
-          const {Debitor} = getCreditor
-          const {TotalDebitor} = Debitor
-          let Debit;
-         Debit =  Debit + TotalDebitor + GrandTotal
-         console.log(Debit)
+          const getDebitor = await Account.findOne({Username:BilledTo})
+          const {TotalDebitor} = getDebitor
+          console.log('totald',TotalDebitor)
+          let newDebit =0;
+        newDebit =  TotalDebitor + GrandTotal
+        //  console.log(Debit)
           const updateSender  = await Account.findOneAndUpdate({Cookie:cokie},{$push:{Transactions:{invoice,BilledTo,ShippedTo,GrandTotal,status,invoiceNo,Type:'Send'}}})
           const updateReceiver = await Account.findOneAndUpdate({Username:BilledTo},{$push:{Transactions:{invoice,BilledTo,ShippedTo,GrandTotal,status,invoiceNo,Type:'Received'}}})
-          const updatecreditor = await Account.findOneAndUpdate({Cookie:cokie},{$push:{Creditor:{invoiceNo}}})
-          const updateDebitor   = await Account.findOneAndUpdate({Username:BilledTo},{$push:{Debitor:{invoiceNo:invoiceNo}}})
-          const updateCreditor = await Account.findOneAndUpdate({Cookie:cokie},{$push:{Creditor:{invoiceNo:invoiceNo}},$set:{Creditor:{totalcreditor:Creditor}}})
+          const updatecreditor = await Account.findOneAndUpdate({Cookie:cokie},{$set:{TotalCreditor:newDebit}})
+          const updateDebitor = await Account.findOneAndUpdate(({Username:BilledTo},{$set:{TotalDebitor:newDebit}}))
         }
        
 
@@ -199,6 +196,7 @@ router.post("/Search", async (req, res) => {
 });
 router.post("/login", async (req, res) => {
   const { Username, Password } = req.body;
+  console.log(req.body)
   const pass = Password;
   const finduser = await User.findOne({ Username: Username });
 
@@ -365,6 +363,20 @@ router.post('/addClient',async(req,res)=>{
        res.json("Sucessfull");
      }
    
+
+})
+
+router.post('/addProduct',async(req,res)=>{
+  const {product,Cookie} = req.body
+  console.log(req.body)
+  const cookie = await AuthCookie(Cookie)
+  const updateUser = await User.findOneAndUpdate({Cookie:cookie},{$push:{Products:product}})
+  console.log(updateUser)
+  if(updateUser===undefined){
+      res.json('not found') 
+  }else{
+    res.json('added sucessfully')
+  }
 
 })
 

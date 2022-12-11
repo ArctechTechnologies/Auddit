@@ -29,6 +29,7 @@ import ChooseSearch from "./ChooseSearch";
 import Profile from "./profile";
 import SearchUser from "./SearchUser";
 import UserProfile from "./UserProfile";
+import ProductCatalog from "./ProductCatalog";
 
 
 function Content(props) {
@@ -154,7 +155,7 @@ const promtClose=()=>{
           <div className="absolute w-14   h-screen bg-white shadow-sm shadow-black right-0   ">
             <div className="m-2 mt-18  gap-4  h-5/6  justify-items-center">
               <div
-                className=" p-2  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
+                className=" p-2  text-center rounded-md cursor-pointer  "
                 onClick={() => {
                   print();
                 }}
@@ -162,7 +163,7 @@ const promtClose=()=>{
                 <div>{<AiOutlinePrinter size={40} />}</div>
               </div>
               <div
-                className=" p-2  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
+                className=" p-2  text-center rounded-md cursor-pointer  "
                 onClick={() => {
                   logout();
                 }}
@@ -170,7 +171,7 @@ const promtClose=()=>{
                 <div>{<BiPowerOff size={40} />}</div>
               </div>{" "}
               <div
-                className=" p-2  text-center rounded-md cursor-pointer shadow-lg  hover:shadow-2xl "
+                className=" p-2  text-center rounded-md cursor-pointer  "
                 onClick={() => {
                   Navigate("/Search");
                 }}
@@ -183,6 +184,7 @@ const promtClose=()=>{
           <div className="bg-white ml-1  w-5/6 absolute   h-fit       overflow-auto   ">
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
+              <Route exact path="/Account" element={<Accounts />}></Route>
               <Route exact path="/Account" element={<Accounts />}></Route>
               <Route
                 exact
@@ -202,6 +204,7 @@ const promtClose=()=>{
               <Route path="profile" element={<Profile />}></Route>
               <Route path="searchUsers" element={<SearchUser />}></Route>
               <Route path="UserProfile" element={<UserProfile />}></Route>
+              <Route path="productCatalog" element={<ProductCatalog/>}></Route>
 
               <Route path="/" element={<Home />}></Route>
             </Routes>

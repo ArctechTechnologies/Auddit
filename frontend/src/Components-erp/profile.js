@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Navigate, useNavigate } from 'react-router-dom';
 const productdata = [
   {
     image: "logo.png",
@@ -85,7 +85,11 @@ const productdata = [
 //   console.log(name);
 // };
 
-function Sample() {
+function Profile() {
+
+
+  const navigate = useNavigate()
+
   return (
     <>
       <div className="overflow-auto h-screen">
@@ -151,9 +155,13 @@ function Sample() {
                 <div className="w-full grid justify-items-center">
                   <button
                     className="  relative right-3  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                    onClick={() => {}}
+                    onClick={() => { }}
                   >
                     Edit Profile
+                  </button>
+                  <button className="  relative left-36 -top-11  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    onClick={() => { navigate('/ProductCatalog') }} >
+                    Product Catalog
                   </button>
                 </div>
               </div>
@@ -169,7 +177,7 @@ function Sample() {
                   src={`${product.image}`}
                   alt="img"
                 />
-               
+
                 <span className=" px-20 text-l text-grey-300">
                   {product.Productname}
                 </span>
@@ -181,10 +189,10 @@ function Sample() {
                   <button
                     className="  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                     onClick={() => {
-                      
+
                     }}
                   >
-                    Edit 
+                    Edit
                   </button>
                 </div>
               </div>
@@ -196,4 +204,4 @@ function Sample() {
   );
 }
 
-export default Sample;
+export default Profile;

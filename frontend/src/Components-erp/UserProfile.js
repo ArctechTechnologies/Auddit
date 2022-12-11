@@ -2,148 +2,104 @@ import { GState } from "jspdf";
 import React from "react";
 import { useState } from "react";
 import jsCookie from "js-cookie";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useEffect } from "react";
+import ProductCatalog from "./ProductCatalog";
+
 const productdata = [
   {
     image: "logo.png",
     Productname: "Product A",
     Price: 200,
-  },
-  {
+  }, {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  }, {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  }, {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  }, {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  }, {
+    image: "logo.png",
+    Productname: "Product A",
+    Price: 200,
+  }, {
     image: "logo.png",
     Productname: "Product A",
     Price: 200,
   },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
-  {
-    image: "logo.png",
-    Productname: "Product A",
-    Price: 200,
-  },
+
 ];
 
 
-// const profiledata = () => {
-//   const nam = localStorage.getItem("Username");
-//   const name = JSON.parse(nam);
-//   const Adres = localStorage.getItem("Adress");
-//   const Adress = JSON.parse(Adres)
-//   const Emai = localStorage.getItem("Email");
-//   const Email = JSON.parse(Emai)
-//   const GSTI = localStorage.getItem("GSTIN");
-//   const GSTIN = JSON.parse(GSTI)
-//   console.log(name);
-// };
+
+
 
 function Userprofile() {
-    const [Name, setName] = useState("");
-    const [Username, setUsername] = useState("");
-    const [Adress, setAdress] = useState("");
-    const [GSTIN, setGSTIN] = useState("");
-    const [Email, setEmail] = useState("");
-    const [Contact, setContact] = useState("");
-    const [Type, setType] = useState("");
-    let effectCount = 0
-    useEffect(() => {
-    if(effectCount===0){
-        getData()
-        effectCount++
+  const navigate = useNavigate()
+
+  const [Name, setName] = useState("");
+  const [Username, setUsername] = useState("");
+  const [Adress, setAdress] = useState("");
+  const [GSTIN, setGSTIN] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Contact, setContact] = useState("");
+  const [Type, setType] = useState("");
+  let effectCount = 0
+  useEffect(() => {
+    if (effectCount === 0) {
+      getData()
+      effectCount++
 
     }
-    }, )
-    
+  },)
 
-    const getData = async () => {
-      const value = JSON.parse(localStorage.getItem("find"));
-      console.log('value',value)
-      const res = await fetch("/Search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ value }),
-      }).then((res) => res.json());
-      console.log(res);
-      const { name, Username, Adress, GSTIN, Email, Contact, Type } = res[0];
-      
-      setName(name);
-      setAdress(Adress)
-      setGSTIN(GSTIN)
-      setEmail(Email)
-       setType(Type)
-       setUsername(Username)
 
-    };
+  const getData = async () => {
+    const value = JSON.parse(localStorage.getItem("find"));
+    console.log('value', value)
+    const res = await fetch("/Search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ value }),
+    }).then((res) => res.json());
+    console.log(res);
+    const { name, Username, Adress, GSTIN, Email, Contact, Type } = res[0];
 
-    const submit=async()=>{
-          const cookie = jsCookie.get();
-          const { loginCookie } = cookie;
-          const Cookie = loginCookie;
-        
-           const res = await fetch("/addClient", {
-             method: "POST",
-             headers: { "Content-Type": "application/json" },
-             body: JSON.stringify({ Username, Cookie }),
-           }).then((res) => res.json());
-           if (res === "Sucessfull") {
-             window.alert("Added SucessFully");
-           } else {
-             window.alert("a Probleum occured");
-           }
+    setName(name);
+    setAdress(Adress)
+    setGSTIN(GSTIN)
+    setEmail(Email)
+    setType(Type)
+    setUsername(Username)
+
+  };
+
+  const submit = async () => {
+    const cookie = jsCookie.get();
+    const { loginCookie } = cookie;
+    const Cookie = loginCookie;
+
+    const res = await fetch("/addClient", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Username, Cookie }),
+    }).then((res) => res.json());
+    if (res === "Sucessfull") {
+      window.alert("Added SucessFully");
+    } else {
+      window.alert("a Probleum occured");
     }
+  }
   return (
     <>
       <div className="overflow-auto h-screen">
@@ -191,10 +147,13 @@ function Userprofile() {
                 <br />
                 <br />
                 <span className="text-l  p-2 "></span>
-                <div className="w-full grid justify-items-center">
+                <div className="w-full grid justify-items-center flex">
                   <button className="  relative right-3  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  onClick={()=>{submit()}}>
+                    onClick={() => { submit() }}>
                     Add Client
+                  </button><button className="  relative left-36 -top-11  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    onClick={() => { navigate('/ProductCatalog') }} >
+                    Product Catalog
                   </button>
                 </div>
                 <br />
