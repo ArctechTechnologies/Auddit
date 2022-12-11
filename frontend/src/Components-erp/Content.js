@@ -181,7 +181,7 @@ function Content(props) {
             </div>
           </div>
           {/* Main workspace */}
-          <div className="bg-white ml-1  w-5/6 absolute   h-fit       overflow-auto   ">
+          <div className="bg-white ml-1  w-5/6 absolute   h-screen       overflow-auto   ">
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
               <Route exact path="/Account" element={<Accounts />}></Route>
