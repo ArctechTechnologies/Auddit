@@ -102,7 +102,7 @@ function Userprofile() {
   }
   return (
     <>
-      <div className="overflow-auto h-screen">
+      <div className="overflow-auto h-screen ">
         <div className="w-full flex font-medium ">
           <div className="w-1/4 ml-2 border-2 outline m-4 mr-2">
             <img className="w-full " src="logo.png" alt="" />
@@ -130,7 +130,7 @@ function Userprofile() {
                 <br />
                 <br />
               </div>
-              <div className="-mt-8 h-80  pl-4  text-black w-full bg-stone-100">
+              <div className="-mt-8 h-80  pl-4  font-normal text-black w-full bg-stone-100">
                 <span className="text-l  p-2">{`${Name}`}</span>
                 <br />
                 <br />
@@ -147,7 +147,7 @@ function Userprofile() {
                 <br />
                 <br />
                 <span className="text-l  p-2 "></span>
-                <div className="w-full grid justify-items-center flex">
+                <div className="w-full grid justify-items-center ">
                   <button className="  relative right-3  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                     onClick={() => { submit() }}>
                     Add Client

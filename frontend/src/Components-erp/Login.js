@@ -70,9 +70,9 @@ function Login(props) {
  const data = await result.json();
  console.log("res", data);
  const { user, account } = data;
- const { Adress, name, GSTIN, Email,Type } = user;
+ const { Adress, name, GSTIN, Email,Type,Product } = user;
  console.log(Adress);
- const { Transactions } = account;
+ const { Transactions,Inventory } = account;
  console.log("Adress", Adress);
  console.log("GSTIN", GSTIN);
  console.log("Email", Email);
@@ -85,6 +85,8 @@ function Login(props) {
  localStorage.setItem("Type", JSON.stringify(Type));
  localStorage.setItem("Transactions", JSON.stringify(Transactions));
  localStorage.setItem("Accounts", JSON.stringify(account));
+ localStorage.setItem("Inventory", JSON.stringify(Inventory));
+ 
 
 
          Navigate('/')

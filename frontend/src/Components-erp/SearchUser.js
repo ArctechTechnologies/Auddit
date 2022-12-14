@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import Transactions from './Transactions'
+
 
 function SearchUser() {
    const Navigate = useNavigate()
@@ -48,9 +48,9 @@ function SearchUser() {
       
        for(let n=0;n<=5;n++)
        {
-           tdElement.setAttribute('id',`${i}td${n}`)
+           tdElement.setAttribute('id',`${i}ts${n}`)
            createdtr.append(tdElement.cloneNode(true))
-           const createdTd = document.getElementById(`${i}td${n}`)
+           const createdTd = document.getElementById(`${i}ts${n}`)
            switch(n){
             case 0:
                 createdTd.innerText = i
@@ -89,12 +89,12 @@ function SearchUser() {
   return (
     <>
       <div className="w-full h-full  " id="body">
-        <div className="w-full text-center font-bold text-bold mb-16">
+        <div className="w-full text-center font-bold text-bold ">
           Search user using Username
         </div>
 
         <div className=" flex justify-center">
-          <div className="mb-3 xl:w-96">
+          <div className="">
             <div className="input-group relative flex flex-wrap items-stretch w-full mb-4">
               <input
                 id="SearchInput"
@@ -121,21 +121,25 @@ function SearchUser() {
             </div>
           </div>
         </div>
+        <div>
+
         <table className="w-full">
           <thead className='bg-gray-900 text-white'>
-            <tr>
-              <th className='px-6 py-4 text-sm font-medium'>srNo</th>
-              <th className='px-6 py-4 text-sm font-medium'>Name</th>
-              <th className='px-6 py-4 text-sm font-medium'>Username</th>
-              <th className='px-6 py-4 text-sm font-medium'>Adress</th>
-              <th className='px-6 py-4 text-sm font-medium'>Gstin</th>
-              <th className='px-6 py-4 text-sm font-medium'>Open</th>
-            </tr>
+          <tr>
+          <th className='px-6 py-4 text-sm font-medium'>srNo</th>
+          <th className='px-6 py-4 text-sm font-medium'>Name</th>
+          <th className='px-6 py-4 text-sm font-medium'>Username</th>
+          <th className='px-6 py-4 text-sm font-medium'>Adress</th>
+          <th className='px-6 py-4 text-sm font-medium'>Gstin</th>
+          <th className='px-6 py-4 text-sm font-medium'>Open</th>
+          </tr>
           </thead>
           <tbody id='tbody' className='w-full text-center'>
-           
+          
           </tbody>
         </table>
+        
+        </div>
       </div>
     </>
   );

@@ -1,6 +1,8 @@
 import React from "react";
 import { Modal, ModalHeader } from "reactstrap";
 import { useState } from "react";
+import jsCookie from "js-cookie";
+import { useEffect } from "react";
 const productdata = [
     // {
     //     image: "logo.png",
@@ -23,9 +25,10 @@ const customStyles = {
 };
 
 function ProductCatalog() {
-    let count = 0;
+  
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [Blur, setBlur] = useState('scale-0')
+    const [Count, setCount] = useState(0)
 
     function openModal() {
         setIsOpen(true);
@@ -38,12 +41,15 @@ function ProductCatalog() {
         setIsOpen(false);
     }
 
-    function sumbitModal(e) {
+    function  sumbitModal (e) {
+        console.log('start')
         e.preventDefault();
         productdata.push({
-            Productname: productname,
+            Name: productname,
             Price: price,
-            discription: discription,
+            Description: discription,
+            Quantity:20,
+            Image:'logo.png'
         })
         const tempproductdata = [{
             Productname1: productname,
@@ -52,12 +58,112 @@ function ProductCatalog() {
         }];
 
         setIsOpen(false);
+        const num = productdata.length - 1
+        const product = productdata[num]
+        const cookie =  jsCookie.get();
+       const {loginCookie} = cookie;
+       const Cookie = loginCookie
+      
+        const Post =async()=>{
+            const res = await fetch("/addProduct", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ product,Cookie }),
+              }).then((res) => res.json());
+              console.log(res)
+              if(res==='sucessfull'){
+                window.alert('added sucessfully')
+              }else{
+                window.alert('probleum occured')
+              }
+        }
+        Post()
+        localStorage["Inventory"] = JSON.stringify(productdata);
 
-        localStorage["productdata"] = JSON.stringify(productdata);
+        console.log('end')
+
+    }
+  let effectCount = 0
+    useEffect(() => {
+    if(effectCount===0){
+        load()
+        effectCount++;
 
     }
 
+    },)
+    
 
+     
+   const load=()=>{
+    console.log('in load')
+    const getdata  = localStorage.getItem('Inventory')
+    if (productdata.length===0){
+
+        const inventory = JSON.parse(getdata)
+        console.log(inventory)
+        inventory.map((index)=>{
+            productdata.push(index)
+        })
+    }
+    let a = productdata.length 
+     setCount(a)
+   let h;
+ h+=`  <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">`
+ h+=  `Update`
+ h+=`  </button>`
+    console.log('productdata',productdata)
+    const parentElement = document.getElementById('tbody')
+    const trElement = document.createElement('tr')
+    const tdElement = document.createElement('td')
+    const buttonElemet = document.createElement('button')
+     const divElement = document.createElement('div')
+    productdata.map((index,i)=>{
+      trElement.setAttribute('id',`tr${i}`)
+      parentElement.append(trElement.cloneNode(true))  
+      const createdtr = document.getElementById(`tr${i}`)
+        for(let j=1;j<=7;j++){
+            tdElement.setAttribute('id',`${i}td${j}`)
+             createdtr.append(tdElement.cloneNode(true))
+             const createdTd = document.getElementById(`${i}td${j}`)
+             let k=i
+             k++
+             switch(j)
+             {
+                case 1:
+                    createdTd.innerText = k
+                    break;
+                    case 2:
+                        createdTd.innerText = index.Name
+                        break;
+                    case 3:
+                        createdTd.innerText = index.Description
+                        break;
+                        case 4:
+                            createdTd.innerText = index.Price
+                            break;
+                            case 5:
+                                createdTd.innerText = index.Quantity
+                                break;
+                                case 6 :
+                                    createdTd.innerText = index.Sold;
+                                    break;
+                                    case 7:
+                                       divElement.setAttribute('id',`button${i}`)
+                                       createdTd.append(divElement.cloneNode(true))
+                                       const createdDiv = document.getElementById(`button${i}`)
+                                       createdDiv.innerHTML = h
+                                       createdDiv.addEventListener('click',(e)=>{console.log(e)})
+                                        break;
+
+             }
+
+            
+        }
+   
+    })
+
+   }
 
 
     const [productname, setproductname] = useState("");
@@ -73,7 +179,7 @@ function ProductCatalog() {
                         <div className=" text-sm 1px solid gray  ">
                             Total Product 
                         </div>
-                        <div className="text-xl font-medium">{count}</div>
+                        <div className="text-xl font-medium">{Count}</div>
                     </div>
                     <div className="p-5">
                         <div className="absolute top-10 right-12">
@@ -136,106 +242,37 @@ function ProductCatalog() {
                 </Modal>
             </div >
 
-            <div className="w-full   h-fit  mt-4" >
+          <div className="w-full">
+
                 <table className="w-full ">
-                    <thead className="border-b bg-gray-800 text-white font-medium  ">
-                        <tr>
-                            <th
-                                scope="col"
-                                className="text-xs font-medium text-left 1px solid text-white p-3 uppercase h-2"
-                                >
-                                S.no
-                            </th>
-                            <th
-                                scope="col"
-                                className="text-left text-xs font-medium 1px solid gray uppercase h-2 "
-                                >
-                                Product name
-                            </th>
-                            <th
-                                scope="col"
-                                className="text-xs font-medium pl-36 text-left 1px solid gray uppercase h-2"
-                                >
-                                Discription
-                            </th>
-                            <th
-                                scope="col"
-                                className="text-xs font-medium pr-26 text-left 1px solid gray uppercase h-2"
-                                >
-                                Price(one Quantity)
-                            </th>
-                            <th
-                                scope="col"
-                                className="text-xs font-medium pr-8 text-right 1px solid gray uppercase pl-8 h-2"
-                                >
-                                Inventory
-                            </th>
-                            <th
-                                scope="col"
-                                className="text-xs font-medium pl-32 text-left 1px solid gray uppercase pl-8 h-2"
-                                >
-                                Total Sold
-                            </th>
-                            <th
-                                scope="col"
-                                className="text-xs font-medium pr-6 1px solid gray uppercase h-2"
-                                >
-                                Add Units
-                            </th>
-                        </tr>
+                    <thead className="border-b bg-gray-800 text-white font-medium  w-full ">
+                    <tr>
+              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                SrNo
+              </th>
+              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                Name
+              </th>
+              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                Description
+              </th>
+              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                Price(per Unit)
+              </th> <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+               Inventory
+                </th> <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                Sold
+              </th><th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                Update
+              </th>
+            </tr>
                     </thead >
 
-                    {
-                        productdata.map((product, i) => (
-                            
-                            <tbody className="p-4 divide-y divide-gray-200 ml-2 overflow-auto ">
-
-                                <td className="py-4 pl-4">
-                                    <div className="flex items-center ">
-                                        {++count}
-                                    </div>
-                                </td>
-                                <td className=" pl-4">
-                                    <div className="flex items-center ">
-                                        {product.Productname}
-                                    </div>
-                                </td>
-                                <td className=" pl-4">
-                                    <div className="">
-                                        {product.discription}
-                                    </div>
-                                </td>
-                                <td className=" pl-4">
-                                    <div className="pl-12">
-                                        {product.Price}
-                                    </div>
-                                </td>
-                                <td className=" pl-12">
-                                    <div className="pl-12 pr-4">
-                                        {2 + 3}
-                                    </div>
-                                </td>
-                                <td className=" pl-4">
-                                    <div className="pl-12 pr-4">
-                                        {2 + 7}
-                                    </div>
-                                </td>
-                                <td className=" pl-4">
-                                    <div className="flex items-center h-5">
-                                        <button className="bg-transparent hover:bg-purple-500 text-purple-700 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded ml-4">
-                                            Add Units
-                                        </button>
-                                    </div>
-                                </td>
-
-                            </tbody >
-
-                        ))
-                    }
-
+                   <tbody id="tbody" className="w-full   text-center"></tbody>
                 </table >
-            </div>
-        
+          
+            
+          </div>
         </>
 
 

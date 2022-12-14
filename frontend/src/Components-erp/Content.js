@@ -38,12 +38,8 @@ function Content(props) {
   const [PromtYes, setPromtYes] = useState('')
   const [PromtNo, setPromtNo] = useState('')
 
-  const [Receiver, setReceiver] = useState("");
-  const [ReceiverAdress, setReceiverAdress] = useState("");
-  const [ReceiverGSTIN, setReceiverGSTIN] = useState("");
-  const [Self, setSelf] = useState("");
-  const [SelfAdress, setSelfAdress] = useState("");
-  const [SelfGSTIN, setSelfGSTIN] = useState("");
+
+
   const [Promt, setPromt] = useState('there is an error')
   const [PromtScale, setPromtScale] = useState('scale-0')
   const changeContentPadding = () => {
@@ -204,7 +200,6 @@ function Content(props) {
               <Route path="profile" element={<Profile />}></Route>
               <Route path="searchUsers" element={<SearchUser />}></Route>
               <Route path="UserProfile" element={<UserProfile />}></Route>
-
               <Route path="productCatalog" element={<ProductCatalog/>}></Route>
 
 

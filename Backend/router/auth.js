@@ -4,7 +4,7 @@ const User = require("../model/userschema");
 const Invoice = require("../model/InvoiceSchema");
 const bcrypt = require("bcryptjs/dist/bcrypt");
 const authenticate = require("../model/middleware/authenticate");
-const { update, updateOne, find } = require("../model/userschema");
+const { update, updateOne, find, findOneAndUpdate } = require("../model/userschema");
 const { json, type } = require("express/lib/response");
 const res = require("express/lib/response");
 const assert = require("assert");
@@ -369,13 +369,27 @@ router.post('/addClient',async(req,res)=>{
 router.post('/addProduct',async(req,res)=>{
   const {product,Cookie} = req.body
   console.log(req.body)
+  const {Name,Description,Quantity,Price} = product
+  const userProduct = {
+       Name:Name,
+       Price:Price,
+       Description:Description,
+       Image:'logo.png'
+  }
+  const accountProduct={
+    Name:Name,
+    Description:Description,
+    Price:Price,
+    Quantity:Quantity,
+    Sold:0
+  }
   const cookie = await AuthCookie(Cookie)
-  const updateUser = await User.findOneAndUpdate({Cookie:cookie},{$push:{Products:product}})
-  console.log(updateUser)
-  if(updateUser===undefined){
-      res.json('not found') 
+  const updateUser =  await User.findOneAndUpdate({Cookie:cookie},{$push:{Products:userProduct}})
+  const updateAccount = await Account.findOneAndUpdate({Cookie:cookie},{$push:{Inventory:accountProduct}})
+  if(!updateUser||!updateAccount){
+    res.json('probleum')
   }else{
-    res.json('added sucessfully')
+    res.json('sucessfull')
   }
 
 })
