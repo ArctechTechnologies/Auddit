@@ -5,7 +5,7 @@ import jsCookie from "js-cookie";
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useEffect } from "react";
-import ProductCatalog from "./ProductCatalog";
+
 
 const productdata = [
   {
@@ -151,7 +151,8 @@ function Userprofile() {
                   <button className="  relative right-3  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                     onClick={() => { submit() }}>
                     Add Client
-                  </button><button className="  relative left-36 -top-11  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  </button>
+                  <button className="  relative left-36 -top-11  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                     onClick={() => { navigate('/PlaceOrder') }} >
                     Place Order
                   </button>
