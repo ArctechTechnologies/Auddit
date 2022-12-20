@@ -68,10 +68,16 @@ router.post("/create", async (req, res) => {
           let newDebit =0;
         newDebit =  TotalDebitor + GrandTotal
         //  console.log(Debit)
+        try{
+
           const updateSender  = await Account.findOneAndUpdate({Cookie:cokie},{$push:{Transactions:{invoice,BilledTo,ShippedTo,GrandTotal,status,invoiceNo,Type:'Send'}}})
           const updateReceiver = await Account.findOneAndUpdate({Username:BilledTo},{$push:{Transactions:{invoice,BilledTo,ShippedTo,GrandTotal,status,invoiceNo,Type:'Received'}}})
           const updatecreditor = await Account.findOneAndUpdate({Cookie:cokie},{$set:{TotalCreditor:newDebit}})
           const updateDebitor = await Account.findOneAndUpdate(({Username:BilledTo},{$set:{TotalDebitor:newDebit}}))
+          res.json('Created')
+        }catch(err){
+          res.json('error')
+        }
         }
        
 

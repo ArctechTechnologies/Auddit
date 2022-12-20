@@ -6,15 +6,13 @@ function PlaceOrder() {
     let effectCount = 0;
     useEffect(() => {
         
-        if (effectCount === 1) {
+        if (effectCount === 0) {
             console.log('effect')
             getdata()
-        }else{
             effectCount++;
-            
         }
 
-    },)
+    },[])
     const Products = []
     const select =[]
 
@@ -96,18 +94,6 @@ function PlaceOrder() {
                          const createdCheck = document.getElementById(`checkbox${i}`)
                             createdCheck.addEventListener('click',(e)=>{handleCheck(e)})
 
-                    //     let m='';
-
-                    //  m+=  `<div class="flex justify-center"  >   `
-                    //  m+=  `<div class="form-check">`
-                    //  m+=   ` <input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckIndeterminate">`
-                    //  m+=    `<label class="form-check-label inline-block text-gray-800" for="flexCheckIndeterminate">`
-                    //  m+=    `</label>`
-                    //  m+=     ` </div>`
-                    //  m+=    `</div>`
-                    //  createdTd.innerHTML = m
-                    //   const checkBoxTd = document.getElementById(`${i}td${j}`)
-                    //    checkBoxTd.addEventListener('click',(id)=>{handleCheck(id)})
                             break
                          
                     case 1:

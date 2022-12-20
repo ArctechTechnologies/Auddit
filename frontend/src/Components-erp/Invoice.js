@@ -277,9 +277,10 @@ const selectValue=(e)=>{          //function to  set both values of b & shipped 
       body: JSON.stringify({ invoice,cookie,SGST,CGST,GrandTotal,BilledTo,ShippedTo,Name,status,Type }),
     })
       const result =  await res.json()
-  if(result==='probleum'){
+      console.log(result)
+  if(result==='error'){
       window.alert('a probleum occured')
-    }else if(result==='created'){
+    }else if(result==='Created'){
       window.prompt("Invoice created ")
       Navigate('/print')
       

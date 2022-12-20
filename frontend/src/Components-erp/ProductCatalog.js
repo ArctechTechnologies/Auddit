@@ -51,6 +51,7 @@ function PlaceOrder() {
           
         const stock = localStorage.getItem('Inventory')
         const Inventory = JSON.parse(stock)
+     
         Inventory.map((index) => {
             Items.push(index)
         })
@@ -64,7 +65,8 @@ function PlaceOrder() {
         const parentElement = document.getElementById('tbody')
         const trElement = document.createElement('tr')
         const tdElement = document.createElement('td')
-
+        Items.shift()
+     console.log('items',Items)
         Items.map((index, i) => {
             i++
              tdElement.setAttribute('Style', `border-bottom:1px solid black`)
