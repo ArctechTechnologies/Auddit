@@ -11,7 +11,7 @@ function PlaceOrder() {
             console.log('effect')
             effectCount++
         }
-    },)
+    },[])
     const Products = []
     const select = []
     const [TProducts, setTProducts] = useState(0)
@@ -47,13 +47,15 @@ function PlaceOrder() {
     let Items = [{
 
     }]
-    const getdata = async () => {
-
+    const getdata =()=>   {
+          
         const stock = localStorage.getItem('Inventory')
         const Inventory = JSON.parse(stock)
         Inventory.map((index) => {
             Items.push(index)
         })
+        let count = Items.length -1
+        setTProducts(Items.length)
         let h = '';
         h += `  <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">`
         h += `Update`
@@ -111,6 +113,7 @@ function PlaceOrder() {
         })
 
     }
+    
 
     const [PromtScale, setPromtScale] = useState('hidden')
     const [Promt, setPromt] = useState('asdas')
@@ -143,7 +146,7 @@ function PlaceOrder() {
                         </div>
                         <div className="text-center font-bold text-2xl  ">Add Product</div>
                         <br></br>
-                        <div className='grid grid-flow-col grid-cols-7 gap'>
+                        <div className='grid grid-flow-col grid-cols-7 gap-2'>
 
                         <div className="flex justify-center">
                             <div className="mb-3 xl:w-96">
