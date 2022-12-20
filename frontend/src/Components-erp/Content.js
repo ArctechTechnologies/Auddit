@@ -30,6 +30,7 @@ import Profile from "./profile";
 import SearchUser from "./SearchUser";
 import UserProfile from "./UserProfile";
 import ProductCatalog from "./ProductCatalog";
+import PlaceOrder from "./PlaceOrder";
 
 
 function Content(props) {
@@ -201,6 +202,7 @@ function Content(props) {
               <Route path="searchUsers" element={<SearchUser />}></Route>
               <Route path="UserProfile" element={<UserProfile />}></Route>
               <Route path="productCatalog" element={<ProductCatalog/>}></Route>
+              <Route path="PlaceOrder" element={<PlaceOrder/>}></Route>
 
 
 

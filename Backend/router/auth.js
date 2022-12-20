@@ -15,11 +15,11 @@ const CreateCookie = require("../model/middleware/CreateCookie");
 const Account = require("../model/accountSchema");
 
 const router = express.Router();
+
+
 require("../db/conn");
 require("../model/userschema");
-router.get("/", (req, res) => {
-  res.send("ff");
-});
+
 router.post("/create", async (req, res) => {
    const {
      invoice,
@@ -393,6 +393,14 @@ router.post('/addProduct',async(req,res)=>{
   }
 
 })
+
+router.post('/getProduct',async(req,res)=>{
+  const {Username} = req.body
+  const getProduct = await Account.findOne({Username:Username})
+  const {Inventory} = getProduct
+  console.log(Inventory)
+  res.json(Inventory)
+ })
 
 
 

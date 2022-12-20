@@ -46,7 +46,7 @@ function Login(props) {
 
       console.log(Username,Password)
 
-     const res = await fetch("/Login", {
+     const res = await fetch("/login", {
        method: "POST",
        headers: { "Content-Type": "application/json" },
        body: JSON.stringify({ Username,Password }),
