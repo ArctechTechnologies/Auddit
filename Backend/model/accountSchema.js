@@ -16,7 +16,7 @@ TotalCreditor: { type: Number },
     
   
  
-
+InvoiceNo:{type:Number},
   Transactions: [{}],
   Cookie: { type: String },
   party: [
@@ -36,6 +36,7 @@ TotalCreditor: { type: Number },
       party: { type: Boolean },
       Credit: { type: Number },
       Debit: { type: Number },
+      party:{type:Boolean}
     },
   ],
   Inventory:[{

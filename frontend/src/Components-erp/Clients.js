@@ -22,11 +22,15 @@ function Clients() {
             console.log(Client) 
             Client.map((index)=>{
                 data.push(index)
-                 cr = cr + index.Credit
-                 dr = dr + index.Debit
+               
+
+                    cr = cr+index.Credit;
+                    dr=dr +index.Debit;
+                
            
                  
                 })
+                 
                 settotalCredit(cr)
                 settotalDebit(dr)
           console.log('data',data)
@@ -77,15 +81,27 @@ function Clients() {
       
     }, [])
     const navi =(e)=>{
-        console.log(e.target.innerText)
+       let navigate    = e.target.innerText
+            data.map((index)=>{
+                if(index.Name===navigate){
+                    navigate = {
+                        Name:index.Name,
+                        Username:index.Username
+                    }
+                }
+            })
+       localStorage.setItem("OpenClient", JSON.stringify(navigate));
+       Navigate('/OpenClient')
+
+
     }
     
     return (
         <>
             <div>
                 <div className="w-full bg-stone-100  border-2 bg-fixed mt-2  ">
-                <div className="flex">
-                <div style={{}} className=" p-5 ">
+                  <div className="flex">
+                     <div style={{}} className=" p-5 ">
                         <div className=" text-sm 1px solid gray  ">
                                 Total Credit
                             </div>

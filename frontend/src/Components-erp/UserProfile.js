@@ -44,7 +44,7 @@ const productdata = [
 
 
 
-function Userprofile() {
+function Userprofile(props) {
   const navigate = useNavigate()
 
   const [Name, setName] = useState("");
@@ -88,14 +88,18 @@ function Userprofile() {
     const cookie = jsCookie.get();
     const { loginCookie } = cookie;
     const Cookie = loginCookie;
-
+     let username = localStorage.getItem('Username')
+     username = JSON.parse(username)
+     let Name = localStorage.getItem('name')
+     Name = JSON.parse(Name)
     const res = await fetch("/addClient", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ Username, Cookie }),
+      body: JSON.stringify({ Username, Cookie,username,Name }),
     }).then((res) => res.json());
     if (res === "Sucessfull") {
       window.alert("Added SucessFully");
+      props.refresh()
     } else {
       window.alert("a Probleum occured");
     }

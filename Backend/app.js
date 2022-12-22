@@ -40,12 +40,6 @@ const middleware =(req,res,next)=>{
 }
 
 
-const { networkInterfaces } = require("os");
-const { TokenExpiredError } = require('jsonwebtoken');
-const path = require('path');
-const router = require('./router/auth');
-const { route } = require('./router/auth');
-const { Router } = require('express');
 
 
 

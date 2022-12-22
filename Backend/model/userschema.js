@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
       Description:{type:String}
     }
     ] ,
-
+ InvoiceNo:{type:Number},
     Cookie:{
         type:String
     }  

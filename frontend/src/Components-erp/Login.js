@@ -77,7 +77,7 @@ function Login(props) {
  console.log("GSTIN", GSTIN);
  console.log("Email", Email);
  console.log("name", name);
- localStorage.setItem("Username", JSON.stringify(name));
+ localStorage.setItem("Username", JSON.stringify(Username));
  localStorage.setItem("Adress", JSON.stringify(Adress));
  localStorage.setItem("GSTIN", JSON.stringify(GSTIN));
  localStorage.setItem("Email", JSON.stringify(Email));
