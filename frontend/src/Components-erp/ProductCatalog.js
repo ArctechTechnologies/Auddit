@@ -4,6 +4,11 @@ import { useState } from 'react';
 
 function PlaceOrder() {
 
+    function favTutorial() {
+        var mylist = document.getElementById("myList");
+        document.getElementById("favourite").value = mylist.options[mylist.selectedIndex].text;
+    }
+
     let effectCount = 0;
     useEffect(() => {
         if (effectCount === 0) {
@@ -11,7 +16,7 @@ function PlaceOrder() {
             console.log('effect')
             effectCount++
         }
-    },[])
+    }, [])
     const Products = []
     const select = []
     const [TProducts, setTProducts] = useState(0)
@@ -47,15 +52,15 @@ function PlaceOrder() {
     let Items = [{
 
     }]
-    const getdata =()=>   {
-          
+    const getdata = () => {
+
         const stock = localStorage.getItem('Inventory')
         const Inventory = JSON.parse(stock)
-     
+
         Inventory.map((index) => {
             Items.push(index)
         })
-        let count = Items.length -1
+        // let count = Items.length - 1
         setTProducts(Items.length)
         let h = '';
         h += `  <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">`
@@ -66,10 +71,10 @@ function PlaceOrder() {
         const trElement = document.createElement('tr')
         const tdElement = document.createElement('td')
         Items.shift()
-     console.log('items',Items)
+        console.log('items', Items)
         Items.map((index, i) => {
-            i++
-             tdElement.setAttribute('Style', `border-bottom:1px solid black`)
+            i++;
+            tdElement.setAttribute('Style', `border-bottom:1px solid black`)
             trElement.setAttribute('id', `tr${i}`)
             parentElement.append(trElement.cloneNode(true))
             const createdtr = document.getElementById(`tr${i}`)
@@ -91,7 +96,8 @@ function PlaceOrder() {
                         createdTd.innerText = index.Description
                         break;
                     case 4:
-                        createdTd.innerText = '18%'
+                        createdTd.innerText = ''
+                       
                         break;
                     case 5:
                         createdTd.innerText = index.Price
@@ -115,15 +121,9 @@ function PlaceOrder() {
         })
 
     }
-    const Add=async()=>{
-        let name = document.getElementById(`productName`).innerText
-        console.log(name)
-
-    }
-    
 
     const [PromtScale, setPromtScale] = useState('hidden')
-    const [Promt, setPromt] = useState('asdas')
+    // const [Promt, setPromt] = useState('asdas')
 
     const PromtOpt = (e) => {
         console.log('promt')
@@ -155,15 +155,14 @@ function PlaceOrder() {
                         <br></br>
                         <div className='grid grid-flow-col grid-cols-7 gap-2'>
 
-                        <div className="flex justify-center">
-                            <div className="mb-3 xl:w-96">
-                                <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
-                                >Name</label
-                                >
-                                <input
-                                 id={`propductName`}
-                                    type="text"
-                                    className="
+                            <div className="flex justify-center">
+                                <div className="mb-3 xl:w-96">
+                                    <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
+                                    >Name</label
+                                    >
+                                    <input
+                                        type="text"
+                                        className="
                                     form-control
                                     block
                                     w-full
@@ -180,168 +179,164 @@ function PlaceOrder() {
                                                  m-0
                                                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                                                  "
-                                                 id="exampleFormControlInput1"
-                                                 placeholder="Name"
-                                                 />
-                            </div>
-                        </div>
-                        <div className="flex justify-center">
-                            <div className="mb-3 xl:w-96">
-                                <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
-                                >Description</label
-                                >
-                                <input
-                                    type="text"
-                                    className="
-                                    form-control
-                                    block
-                                    w-full
-                                    px-3
-                                    py-1.5
-                                    text-base
-                                    font-normal
-                                    text-gray-700
-                                    bg-white bg-clip-padding
-                                    border border-solid border-gray-300
-                                    rounded
-                                    transition
-                                    ease-in-out
-                                    m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                    "
-                                    id="exampleFormControlInput1"
-                                    placeholder="Description"
+                                        id="exampleFormControlInput1"
+                                        placeholder="Name"
                                     />
-                            </div>
-                        </div><div className="flex justify-center">
-                            <div className="mb-3 xl:w-96">
-                                <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
-                                >HSN CODE</label
-                                >
-                                <input
-                                    type="text"
-                                    className="
-                                    form-control
-                                    block
-                                    w-full
-                                    px-3
-                                    py-1.5
-                                    text-base
-                                    font-normal
-                                    text-gray-700
-                                    bg-white bg-clip-padding
-                                    border border-solid border-gray-300
-                                    rounded
-                                    transition
-                                    ease-in-out
-                                    m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                    "
-                                    id="exampleFormControlInput1"
-                                    placeholder="HSN CODE"
-                                    />
-                            </div>
-                        </div><div className="flex justify-center">
-                            <div className="mb-3 xl:w-96">
-                                <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
-                                >Tax</label
-                                >
-                                <input
-                                    type="text"
-                                    className="
-                                    form-control
-                                    block
-                                    w-full
-                                    px-3
-                                    py-1.5
-                                    text-base
-                                    font-normal
-                                    text-gray-700
-                                    bg-white bg-clip-padding
-                                    border border-solid border-gray-300
-                                    rounded
-                                    transition
-                                    ease-in-out
-                                    m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                    "
-                                    id="exampleFormControlInput1"
-                                    placeholder="Tax"
-                                    />
-                            </div>
-                        </div><div className="flex justify-center">
-                            <div className="mb-3 xl:w-96">
-                                <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
-                                >Price</label
-                                >
-                                <input
-                                    type="text"
-                                    className="
-                                    form-control
-                                    block
-                                    w-full
-                                    px-3
-                                    py-1.5
-                                    text-base
-                                    font-normal
-                                    text-gray-700
-                                    bg-white bg-clip-padding
-                                    border border-solid border-gray-300
-                                    rounded
-                                    transition
-                                    ease-in-out
-                                    m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                    "
-                                    id="exampleFormControlInput1"
-                                    placeholder="price"
-                                    />
-                            </div>
-                        </div><div className="flex justify-center">
-                            <div className="mb-3 xl:w-96">
-                                <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
-                                >Stock</label
-                                >
-                                <input
-                                    type="text"
-                                    className="
-                                    form-control
-                                    block
-                                    w-full
-                                    px-3
-                                    py-1.5
-                                    text-base
-                                    font-normal
-                                    text-gray-700
-                                    bg-white bg-clip-padding
-                                    border border-solid border-gray-300
-                                    rounded
-                                    transition
-                                    ease-in-out
-                                    m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                    "
-                                    id="exampleFormControlInput1"
-                                    placeholder="Stock"
-                                    />
-                            </div>
-                        </div>
-                        <div>
-                            <div>Image</div>
-    <button className="    bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                    onClick={() => {  }} >
-                 Image
-                  </button>
-
-            
-    </div>
-                    </div>
-                    <button className="bg-transparent mt-4 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                                onClick={()=>{Add()}}
-                                >
-                                  Submit
-                                </button>
                                 </div>
+                            </div>
+                            <div className="flex justify-center">
+                                <div className="mb-3 xl:w-96">
+                                    <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
+                                    >Description</label
+                                    >
+                                    <input
+                                        type="text"
+                                        className="
+                                    form-control
+                                    block
+                                    w-full
+                                    px-3
+                                    py-1.5
+                                    text-base
+                                    font-normal
+                                    text-gray-700
+                                    bg-white bg-clip-padding
+                                    border border-solid border-gray-300
+                                    rounded
+                                    transition
+                                    ease-in-out
+                                    m-0
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                    "
+                                        id="exampleFormControlInput1"
+                                        placeholder="Description"
+                                    />
+                                </div>
+                            </div><div className="flex justify-center">
+                                <div className="mb-3 xl:w-96">
+                                    <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
+                                    >HSN CODE</label
+                                    >
+                                    <input
+                                        type="text"
+                                        className="
+                                    form-control
+                                    block
+                                    w-full
+                                    px-3
+                                    py-1.5
+                                    text-base
+                                    font-normal
+                                    text-gray-700
+                                    bg-white bg-clip-padding
+                                    border border-solid border-gray-300
+                                    rounded
+                                    transition
+                                    ease-in-out
+                                    m-0
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                    "
+                                        id="exampleFormControlInput1"
+                                        placeholder="HSN CODE"
+                                    />
+                                </div>
+                            </div><div className="flex justify-center">
+                                <div className="mb-3 xl:w-96">
+                                        <div for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
+                                        >Tax</div>
+                                    <form>
+                                        <select className='  form-control
+                                    block
+                                    w-full
+                                    px-3
+                                    py-1.5
+                                    text-base
+                                    font-normal
+                                    text-gray-700
+                                    bg-white bg-clip-padding
+                                    border border-solid border-gray-300
+                                    rounded
+                                    transition
+                                    ease-in-out
+                                    m-0
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' id="myList" onchange="favTutorial()" >
+                                            <option>18% CGST</option>
+                                            <option>18% CGST</option>
+                                            <option>19% CGST</option>
+                                            <option>27% CGST</option>
+                                        </select>
+                                    </form>
+
+                                </div>
+                            </div><div className="flex justify-center">
+                                <div className="mb-3 xl:w-96">
+                                    <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
+                                    >Price</label
+                                    >
+                                    <input
+                                        type="text"
+                                        className="
+                                    form-control
+                                    block
+                                    w-full
+                                    px-3
+                                    py-1.5
+                                    text-base
+                                    font-normal
+                                    text-gray-700
+                                    bg-white bg-clip-padding
+                                    border border-solid border-gray-300
+                                    rounded
+                                    transition
+                                    ease-in-out
+                                    m-0
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                    "
+                                        id="exampleFormControlInput1"
+                                        placeholder="price"
+                                    />
+                                </div>
+                            </div><div className="flex justify-center">
+                                <div className="mb-3 xl:w-96">
+                                    <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
+                                    >Stock</label
+                                    >
+                                    <input
+                                        type="text"
+                                        className="
+                                    form-control
+                                    block
+                                    w-full
+                                    px-3
+                                    py-1.5
+                                    text-base
+                                    font-normal
+                                    text-gray-700
+                                    bg-white bg-clip-padding
+                                    border border-solid border-gray-300
+                                    rounded
+                                    transition
+                                    ease-in-out
+                                    m-0
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                    "
+                                        id="exampleFormControlInput1"
+                                        placeholder="Stock"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <div>Image</div>
+                                <button className="  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                    onClick={() => { }} >
+                                    Image
+                                </button> 
+
+
+                            </div>
+
+                        </div>
+                    </div>
 
                 </div>
                 <div className="w-full bg-stone-100  border-2 bg-fixed mt-2  ">
@@ -354,15 +349,15 @@ function PlaceOrder() {
                         </div>
                         <div className="p-5">
                             <div className="absolute top-10 right-12">
-                                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                                onClick={()=>{PromtOpt()}}
+                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                    onClick={() => { PromtOpt() }}
                                 >
-                                  Add Product
+                                    Add Product
                                 </button>
                             </div>
                         </div>
 
-                    
+
                         <div>
                         </div>
                     </div>
@@ -394,14 +389,18 @@ function PlaceOrder() {
                                 </th><th scope="col" className="text-sm font-medium text-white px-6 py-4">
                                     Update
                                 </th>
-
                             </tr>
                         </thead >
+
 
                         <tbody id="tbody" className="w-full   text-center"></tbody>
                     </table >
                 </div>
             </div>
+
+
+
+
         </>
     )
 }
