@@ -102,8 +102,8 @@ function Userprofile(props) {
       window.alert("Added SucessFully");
       props.refresh()
     }
-      else if(res==='user not added'){
-        window.alert('user not added')
+      else if(res==='user already added'){
+        window.alert('user already added')
       }
      else {
       window.alert("a Probleum occured");

@@ -115,6 +115,11 @@ function PlaceOrder() {
         })
 
     }
+    const Add=async()=>{
+        let name = document.getElementById(`productName`).innerText
+        console.log(name)
+
+    }
     
 
     const [PromtScale, setPromtScale] = useState('hidden')
@@ -156,6 +161,7 @@ function PlaceOrder() {
                                 >Name</label
                                 >
                                 <input
+                                 id={`propductName`}
                                     type="text"
                                     className="
                                     form-control
@@ -326,9 +332,15 @@ function PlaceOrder() {
                     onClick={() => {  }} >
                  Image
                   </button>
+
             
     </div>
                     </div>
+                    <button className="bg-transparent mt-4 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                onClick={()=>{Add()}}
+                                >
+                                  Submit
+                                </button>
                                 </div>
 
                 </div>

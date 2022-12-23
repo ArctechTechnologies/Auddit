@@ -353,7 +353,7 @@ router.post('/addClient', async (req, res) => {
   console.log(Cookie,Username,username,Name)
     
   const cookie = await AuthCookie(Cookie);
-  const findUser = await Account({Cookie:cookie})
+  const findUser = await Account.findOne({Cookie:cookie})
   console.log('find',findUser)
   const {Client}  = findUser
    let current = false
@@ -403,7 +403,7 @@ router.post('/addClient', async (req, res) => {
     }
     
   }else{
-    res.json('user not added')
+    res.json('user already added')
   }
     
   })

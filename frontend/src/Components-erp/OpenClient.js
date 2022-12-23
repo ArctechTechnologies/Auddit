@@ -40,6 +40,7 @@ function OpenClient() {
            const createdTr = document.getElementById(`tr${i}`)
             for(let j=0;j<=5;j++){
                  tdElement.setAttribute('id',`${i}td${j}`)
+                 
                 createdTr.append(tdElement.cloneNode(true))
                 const createdTd = document.getElementById(`${i}td${j}`)
                 let k=i+1
