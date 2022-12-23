@@ -148,7 +148,7 @@ router.post("/Register", async (req, res) => {
           Cash: 0,
           CashInHand: 0,
           CashInBank: 0,
-          InvoiceNo: 0
+          InvoiceNo: 0,
         });
 
         const createdAccount = await createAccount.save()
@@ -351,45 +351,63 @@ router.post('/addDemoClient', async (req, res) => {
 router.post('/addClient', async (req, res) => {
   const { Cookie, Username, username, Name } = req.body
   console.log(Cookie,Username,username,Name)
-  // console.log(name);
+    
   const cookie = await AuthCookie(Cookie);
+  const findUser = await Account({Cookie:cookie})
+  console.log('find',findUser)
+  const {Client}  = findUser
+   let current = false
+   
+   console.log(Client)
+   let l = Client.length;
+   console.log(l)
+   console.log('client',Client)
+  Client.map((index)=>{
+    if(index.Username===Username){
+       current = true
+    }
+  }) 
+ if(current===false||l===0){
 
-  const findClient = await User.findOne({ Username: Username })
-  const { name, Type } = findClient
-  const Client = {
-    Username: Username,
-    Name: name,
-    Debit: 0,
-    Credit: 0,
-    party: true,
-  };
-  const Client2 = {
-    Username: username,
-    Name: Name,
-    Debit: 0,
-    Credit: 0,
-    Party: true,
-  }
-
-  const addClient = await Account.findOneAndUpdate(
-    { Cookie: cookie },
-    { $push: { Client: Client } }
-  );
-  //  console.log(addClient)
-  // res.json(addClient)
+   const findClient = await User.findOne({ Username: Username })
+   const { name, Type } = findClient
+   const Client1 = {
+     Username: Username,
+     Name: name,
+     Debit: 0,
+     Credit: 0,
+     party: true,
+    };
+    
+    
+    const addClient = await Account.findOneAndUpdate(
+      { Cookie: cookie },
+      { $push: { Client: Client1 } }
+      );
+      //  console.log(addClient)
+      // res.json(addClient)
   const addParty = await Account.findOneAndUpdate(
     { Username: Username },
-    { $push: { Client: Client2 } }
-  );
-  if (!addClient || !addParty) {
-    res.json("failed");
-  } else {
-    res.json("Sucessfull");
+    { $push: { Client: {
+      Username:username,
+      Name:Name,
+      party:true,
+      Debit:0,
+      Credit:0,
+    } } }
+    );
+    if (!addClient || !addParty) {
+      res.json("failed");
+    } else {
+      res.json("Sucessfull");
+    }
+    
+  }else{
+    res.json('user not added')
   }
-
-
-})
-
+    
+  })
+  
 router.post('/addProduct', async (req, res) => {
   const { product, Cookie } = req.body
   console.log(req.body)

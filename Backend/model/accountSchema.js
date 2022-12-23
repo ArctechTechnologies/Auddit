@@ -36,7 +36,7 @@ InvoiceNo:{type:Number},
       party: { type: Boolean },
       Credit: { type: Number },
       Debit: { type: Number },
-      party:{type:Boolean}
+      party:{type:Boolean},
     },
   ],
   Inventory:[{
