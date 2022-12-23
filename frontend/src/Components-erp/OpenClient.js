@@ -72,6 +72,7 @@ function OpenClient() {
                                         case 5:
                                             createdTd.setAttribute('style',`color:Blue;cursor:pointer`)
                                             createdTd.innerText = 'Print'
+                                            break;
                 }
                 
             }

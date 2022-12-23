@@ -33,6 +33,7 @@ import ProductCatalog from "./ProductCatalog";
 import PlaceOrder from "./PlaceOrder";
 import Clients from "./Clients";
 import OpenClient from "./OpenClient";
+import DebitAccount from "./DebitAccount";
 
 
 function Content(props) {
@@ -215,8 +216,7 @@ function Content(props) {
           <div className="bg-white ml-1  w-5/6 absolute   h-screen       overflow-auto   ">
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
-              <Route exact path="/Account" element={<Accounts />}></Route>
-              <Route exact path="/Account" element={<Accounts />}></Route>
+              <Route exact path="Account" element={<Accounts />}></Route>
               <Route
                 exact
                 path="/AddDemoClient"
@@ -239,7 +239,8 @@ function Content(props) {
               <Route path="PlaceOrder" element={<PlaceOrder/>}></Route>
               <Route path="Clients" element={<Clients/>}></Route>
               <Route path="OpenClient" element={<OpenClient/>}></Route>
-
+              <Route path="DebitAccount" element={<DebitAccount/>}></Route>
+              
 
 
               <Route path="/" element={<Home />}></Route>
