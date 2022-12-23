@@ -30,6 +30,9 @@ import Profile from "./profile";
 import SearchUser from "./SearchUser";
 import UserProfile from "./UserProfile";
 import ProductCatalog from "./ProductCatalog";
+import PlaceOrder from "./PlaceOrder";
+import Clients from "./Clients";
+import OpenClient from "./OpenClient";
 
 
 function Content(props) {
@@ -102,6 +105,38 @@ function Content(props) {
 
     // }
   };
+ 
+  const refresh=async()=>{
+    const cookie = jsCookie.get();
+    const { loginCookie } = cookie;
+    const Cookie = loginCookie;
+    const result = await fetch("/getdata", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Cookie }),
+    });
+    const data = await result.json();
+    console.log("res", data);
+    const { user, account } = data;
+    const { Adress, name, GSTIN, Email,Type,Product,Username } = user;
+    console.log(Adress);
+    const { Transactions,Inventory } = account;
+    console.log("Adress", Adress);
+    console.log("GSTIN", GSTIN);
+    console.log("Email", Email);
+    console.log("name", name);
+    localStorage.setItem("Username", JSON.stringify(Username));
+    localStorage.setItem("Adress", JSON.stringify(Adress));
+    localStorage.setItem("GSTIN", JSON.stringify(GSTIN));
+    localStorage.setItem("Email", JSON.stringify(Email));
+    localStorage.setItem("name", JSON.stringify(name));
+    localStorage.setItem("Type", JSON.stringify(Type));
+    localStorage.setItem("Transactions", JSON.stringify(Transactions));
+    localStorage.setItem("Accounts", JSON.stringify(account));
+    localStorage.setItem("Inventory", JSON.stringify(Inventory));
+    
+  }
+
   return (
     <>
       <div className="flex   bg-white h-fit  w-full    relative  ">
@@ -192,15 +227,18 @@ function Content(props) {
                 path="/CreditAccount"
                 element={<CreditAccount />}
               ></Route>
-              <Route exact path="/invoices" element={<Invoice />}></Route>
+              <Route exact path="/invoices" element={<Invoice refresh={refresh} />}></Route>
               <Route exact path="Print" element={<PrintInvoices />}></Route>
               <Route path="Transactions" element={<Transactions />}></Route>
               <Route path="Search" element={<ChooseSearch />}></Route>
               <Route path="sample" element={<Sample />}></Route>
               <Route path="profile" element={<Profile />}></Route>
               <Route path="searchUsers" element={<SearchUser />}></Route>
-              <Route path="UserProfile" element={<UserProfile />}></Route>
+              <Route path="UserProfile" element={<UserProfile refresh={refresh} />}></Route>
               <Route path="productCatalog" element={<ProductCatalog/>}></Route>
+              <Route path="PlaceOrder" element={<PlaceOrder/>}></Route>
+              <Route path="Clients" element={<Clients/>}></Route>
+              <Route path="OpenClient" element={<OpenClient/>}></Route>
 
 
 

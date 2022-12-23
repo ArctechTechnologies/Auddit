@@ -1,0 +1,8 @@
+{
+  "projectName": "auddit",
+  "meta": {
+    "type": "frontend"
+  },
+  "packageManager": "npm",
+  "hash": "8fc9c5d7"
+}

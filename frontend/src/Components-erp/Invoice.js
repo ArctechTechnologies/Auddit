@@ -5,7 +5,7 @@ import { BiUser } from "react-icons/bi";
 import "../Components-erp/invoiceSchema.css";
 import jsCookie from 'js-cookie'
 import { useNavigate } from "react-router-dom";
-function Invoice() {
+function Invoice(props) {
   const Navigate = useNavigate()
   let srCount = 0;
   let effectCount = 0;
@@ -277,13 +277,20 @@ const selectValue=(e)=>{          //function to  set both values of b & shipped 
       body: JSON.stringify({ invoice,cookie,SGST,CGST,GrandTotal,BilledTo,ShippedTo,Name,status,Type }),
     })
       const result =  await res.json()
-  if(result==='probleum'){
+      console.log('result',result)
+  if(result==='error'){
       window.alert('a probleum occured')
-    }else if(result==='created'){
-      window.prompt("Invoice created ")
+    }else if(result==='Created'){
+      window.alert("Invoice created ")
+      props.refresh()
       Navigate('/print')
       
+    }else if(result==='user not added'){
+      window.alert(result)
+    }else if(result==='Offline Party'){
+      window.alert('offline party')
     }
+    
   };
 
 

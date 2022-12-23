@@ -46,7 +46,7 @@ function Login(props) {
 
       console.log(Username,Password)
 
-     const res = await fetch("/Login", {
+     const res = await fetch("/login", {
        method: "POST",
        headers: { "Content-Type": "application/json" },
        body: JSON.stringify({ Username,Password }),
@@ -77,7 +77,7 @@ function Login(props) {
  console.log("GSTIN", GSTIN);
  console.log("Email", Email);
  console.log("name", name);
- localStorage.setItem("Username", JSON.stringify(name));
+ localStorage.setItem("Username", JSON.stringify(Username));
  localStorage.setItem("Adress", JSON.stringify(Adress));
  localStorage.setItem("GSTIN", JSON.stringify(GSTIN));
  localStorage.setItem("Email", JSON.stringify(Email));

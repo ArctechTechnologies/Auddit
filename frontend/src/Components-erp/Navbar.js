@@ -172,7 +172,7 @@ function Navbar(props) {
               </div>
             </div>
           </Link>
-          <Link to="/Transactions">
+          <Link to="/Clients">
             <div className="bg-transparent flex w-inherit  cursor-pointer rounded-md ml-1  mt-4 hover:bg-purple-500">
               <div className=" w-12 place-items-center  ">
                 <svg
@@ -191,7 +191,7 @@ function Navbar(props) {
               <div
                 className={`text-white grid justify-items-center items-center text-sm   ${scaller}  ${hoverScale}  `}
               >
-              <div>Home</div>
+              <div>Clients</div>
               </div>
             </div>
           </Link>

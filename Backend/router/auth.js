@@ -15,76 +15,91 @@ const CreateCookie = require("../model/middleware/CreateCookie");
 const Account = require("../model/accountSchema");
 
 const router = express.Router();
+
+
 require("../db/conn");
 require("../model/userschema");
-router.get("/", (req, res) => {
-  res.send("ff");
-});
+
 router.post("/create", async (req, res) => {
-   const {
-     invoice,
-     cookie,
-     SGST,
-     CGST,
-     GrandTotal,
-     BilledTo,
-     ShippedTo,
-     invoiceNo,
-     Name,
-     status,
-     Type,
-   } = req.body;
-   const cokie  = await AuthCookie(cookie)
-   console.log(cokie)
-   const ddd = new Date()
-   const day = ddd.getDate()
-   const Month = ddd.getMonth()
-   const year = ddd.getFullYear()
-   const date = day+'/'+Month+'/'+year;
-   console.log(BilledTo)
-   let party = false;
-   let client = true;
-   
-   const  user = await Account.findOne({Cookie:cokie})
-     const {Client,TotalCreditor}  = user
-            console.log(TotalCreditor)
-        let newCredit = 0;
-        newCredit = newCredit + TotalCreditor +GrandTotal;
-     Client.map((index)=>{
-     if(BilledTo===index.Username){
-      current = true
-      if(index.party===true){
+  const {
+    invoice,
+    cookie,
+    SGST,
+    CGST,
+    GrandTotal,
+    BilledTo,
+    ShippedTo,
+    invoiceNo,
+    Name,
+    status,
+    Type,
+  } = req.body;
+  const cokie = await AuthCookie(cookie)
+  console.log(cokie)
+  const ddd = new Date()
+  const day = ddd.getDate()
+  const Month = ddd.getMonth()
+  const year = ddd.getFullYear()
+  const date = day + '/' + Month + '/' + year;
+  console.log(BilledTo)
+  let party = false;
+  let client = false;
+  const user = await Account.findOne({ Cookie: cokie })
+  const { Client, TotalCreditor, InvoiceNo, Username } = user
+  console.log('invoiceNo', InvoiceNo)
+  console.log('Username', Username)
+  const inNo = InvoiceNo + 1;
+  const updateinNo = year + '-'+ inNo;
+   console.log('invoiceinNo',updateinNo)
+  console.log('inNo', inNo)
+  console.log(TotalCreditor)
+  let newCredit = 0;
+  newCredit = newCredit + TotalCreditor + GrandTotal;
+  Client.map((index) => {
+    if (BilledTo === index.Username) {
+      client = true;
+      if (index.party === true) {
         party = true
       }
-     }
-    
-      
-    })
-    if(current===true){
-        if(party===true){
-          const getDebitor = await Account.findOne({Username:BilledTo})
-          const {TotalDebitor} = getDebitor
-          console.log('totald',TotalDebitor)
-          let newDebit =0;
-        newDebit =  TotalDebitor + GrandTotal
-        //  console.log(Debit)
-          const updateSender  = await Account.findOneAndUpdate({Cookie:cokie},{$push:{Transactions:{invoice,BilledTo,ShippedTo,GrandTotal,status,invoiceNo,Type:'Send'}}})
-          const updateReceiver = await Account.findOneAndUpdate({Username:BilledTo},{$push:{Transactions:{invoice,BilledTo,ShippedTo,GrandTotal,status,invoiceNo,Type:'Received'}}})
-          const updatecreditor = await Account.findOneAndUpdate({Cookie:cokie},{$set:{TotalCreditor:newDebit}})
-          const updateDebitor = await Account.findOneAndUpdate(({Username:BilledTo},{$set:{TotalDebitor:newDebit}}))
-        }
-       
+    }
 
-    }else{
+  })
+  try {
+    console.log('in try')
+    if (client === true) {
+      if (party === true) {
+        console.log('true party')
+        const getDebitor = await Account.findOne({ Username: BilledTo })
+        const { TotalDebitor } = getDebitor
+        console.log('totald', TotalDebitor)
+        let newDebit = 0;
+        newDebit = TotalDebitor + GrandTotal
+        //  console.log(Debit)
+        console.log('in add')
+        const updateSender = await Account.findOneAndUpdate({ Cookie: cokie }, { $push: { Transactions: { invoice, BilledTo, ShippedTo, GrandTotal, status, invoiceNo: updateinNo, Type: 'Send', Date: date } } })
+        const updateReceiver = await Account.findOneAndUpdate({ Username: BilledTo }, { $push: { Transactions: { invoice, Sender: Username, GrandTotal, status, invoiceNo: updateinNo, Type: 'Received', Date: date } } })
+        const updatecreditor = await Account.findOneAndUpdate({ Cookie: cokie }, { $set: { TotalCreditor: newDebit } })
+        const updateDebitor = await Account.findOneAndUpdate(({ Username: BilledTo }, { $set: { TotalDebitor: newDebit } }))
+        const UpdateInvoice = await Account.findOneAndUpdate({ Cookie: cokie }, { $set: { InvoiceNo: inNo } })
+        res.json('Created')
+
+      }else{
+        res.json('offline party')
+      }
+    } else {
       res.json('user not added')
     }
-    console.log(client)
+  } catch (err) {
+    console.log(err)
+    res.json('error')
+  }
+  console.log(client)
 
-   
+
   //  const find = await Account.findOneAndUpdate({Cookie:cokie},{$Set:{'party.$[].$[Userame].Type':'manufact'}},{arrayFilters:{'Username_Name':'sampleB1'} } )
 
-   
- 
+
+
 
 });
 router.post("/Register", async (req, res) => {
@@ -121,7 +136,7 @@ router.post("/Register", async (req, res) => {
         const Creditor = {
           TotalCreditor: 0,
           Invoice: [{}],
-        };  const Debitor = {
+        }; const Debitor = {
           TotalDebitor: 0,
           Invoice: [{}],
         };
@@ -130,12 +145,13 @@ router.post("/Register", async (req, res) => {
           Username,
           TotalCreditor: 0,
           TotalDebitor: 0,
-          Cash:0,
-          CashInHand:0,
-          CashInBank:0,
+          Cash: 0,
+          CashInHand: 0,
+          CashInBank: 0,
+          InvoiceNo: 0
         });
-      
-          const createdAccount = await createAccount.save()
+
+        const createdAccount = await createAccount.save()
 
         if (!result || !createdAccount) {
           console.log("dberror");
@@ -177,21 +193,21 @@ router.post("/Search", async (req, res) => {
   //  console.log(searchUser)
   let find = await User.aggregate([{ $match: { Username: searchUser } }]);
   console.log(find[0])
-  if(find[0]===undefined){
+  if (find[0] === undefined) {
     console.log('asdasd')
-   find =  await User.aggregate([{$match:{name:searchUser}}])
+    find = await User.aggregate([{ $match: { name: searchUser } }])
     console.log(find)
-  }else{
-   console.log('else')
+  } else {
+    console.log('else')
     const fin = find;
   }
   console.log("find", find);
-  let list=[]
+  let list = []
   let i = 0;
-  find.map((index)=>{
+  find.map((index) => {
     list.push(index)
   })
-     
+
   res.json(list);
 });
 router.post("/login", async (req, res) => {
@@ -299,99 +315,119 @@ router.post("/getReceiver", async (req, res) => {
   res.json(FindUser);
 });
 
-router.post('/addDemoClient',async(req,res)=>{
-     const {user,Cookie} = req.body
-   const { name, GSTIN, Adress, Username, Email, Type } =  user
-   console.log(name)
-   const cookie = await AuthCookie(Cookie)
-   const  AuthClient = await Account.findOne({Cookie:cookie})
-      const Client = {
-        Username: Username,
-        Name: name,
-        Debitor: 0,
-        Creditor: 0,
-        party: false,
-      };
-      const Party = {
-        Username:Username,
-        Name: name,
-        GSTIN: GSTIN,
-        Adress: Adress,
-        Email: Email,
-        Type: Type,
-      };
-     const addClient = await Account.findOneAndUpdate({Cookie:cookie},{$push:{Client:Client}})
-    //  console.log(addClient)
-    // res.json(addClient)
-     const addParty = await Account.findOneAndUpdate({Cookie:cookie},{$push:{party:Party}})
-     if(!addClient||!addParty){
-      res.json('failed')
-     }else{
-      res.json('Sucessfull')
-     }
-      
+router.post('/addDemoClient', async (req, res) => {
+  const { user, Cookie } = req.body
+  const { name, GSTIN, Adress, Username, Email, Type } = user
+  console.log(name)
+  const cookie = await AuthCookie(Cookie)
+  const AuthClient = await Account.findOne({ Cookie: cookie })
+  const Client = {
+    Username: Username,
+    Name: name,
+    Debitor: 0,
+    Creditor: 0,
+    party: false,
+  };
+  const Party = {
+    Username: Username,
+    Name: name,
+    GSTIN: GSTIN,
+    Adress: Adress,
+    Email: Email,
+    Type: Type,
+  };
+  const addClient = await Account.findOneAndUpdate({ Cookie: cookie }, { $push: { Client: Client } })
+  //  console.log(addClient)
+  // res.json(addClient)
+  const addParty = await Account.findOneAndUpdate({ Cookie: cookie }, { $push: { party: Party } })
+  if (!addClient || !addParty) {
+    res.json('failed')
+  } else {
+    res.json('Sucessfull')
+  }
+
 })
 
-router.post('/addClient',async(req,res)=>{
-  const {Cookie,Username} = req.body
+router.post('/addClient', async (req, res) => {
+  const { Cookie, Username, username, Name } = req.body
+  console.log(Cookie,Username,username,Name)
   // console.log(name);
   const cookie = await AuthCookie(Cookie);
 
-  const findClient  = await User.findOne({Username:Username})
-   const {name,Type}  =  findClient
-     const Client = {
-       Username: Username,
-       Name: name,
-       Debit: 0,
-       Credit: 0,
-       party: true,
-     };
-    
-     const addClient = await Account.findOneAndUpdate(
-       { Cookie: cookie },
-       { $push: { Client: Client } }
-     );
-     //  console.log(addClient)
-     // res.json(addClient)
-     const addParty = await Account.findOneAndUpdate(
-       { Username: Username },
-       { $push: { Client: Client } }
-     );
-     if (!addClient || !addParty) {
-       res.json("failed");
-     } else {
-       res.json("Sucessfull");
-     }
-   
+  const findClient = await User.findOne({ Username: Username })
+  const { name, Type } = findClient
+  const Client = {
+    Username: Username,
+    Name: name,
+    Debit: 0,
+    Credit: 0,
+    party: true,
+  };
+  const Client2 = {
+    Username: username,
+    Name: Name,
+    Debit: 0,
+    Credit: 0,
+    Party: true,
+  }
+
+  const addClient = await Account.findOneAndUpdate(
+    { Cookie: cookie },
+    { $push: { Client: Client } }
+  );
+  //  console.log(addClient)
+  // res.json(addClient)
+  const addParty = await Account.findOneAndUpdate(
+    { Username: Username },
+    { $push: { Client: Client2 } }
+  );
+  if (!addClient || !addParty) {
+    res.json("failed");
+  } else {
+    res.json("Sucessfull");
+  }
+
 
 })
 
-router.post('/addProduct',async(req,res)=>{
-  const {product,Cookie} = req.body
+router.post('/addProduct', async (req, res) => {
+  const { product, Cookie } = req.body
   console.log(req.body)
-  const {Name,Description,Quantity,Price} = product
+  const { Name, Description, Quantity, Price } = product
   const userProduct = {
-       Name:Name,
-       Price:Price,
-       Description:Description,
-       Image:'logo.png'
+    Name: Name,
+    Price: Price,
+    Description: Description,
+    Image: 'logo.png'
   }
-  const accountProduct={
-    Name:Name,
-    Description:Description,
-    Price:Price,
-    Quantity:Quantity,
-    Sold:0
+  const accountProduct = {
+    Name: Name,
+    Description: Description,
+    Price: Price,
+    Quantity: Quantity,
+    Sold: 0
   }
   const cookie = await AuthCookie(Cookie)
-  const updateUser =  await User.findOneAndUpdate({Cookie:cookie},{$push:{Products:userProduct}})
-  const updateAccount = await Account.findOneAndUpdate({Cookie:cookie},{$push:{Inventory:accountProduct}})
-  if(!updateUser||!updateAccount){
+  const updateUser = await User.findOneAndUpdate({ Cookie: cookie }, { $push: { Products: userProduct } })
+  const updateAccount = await Account.findOneAndUpdate({ Cookie: cookie }, { $push: { Inventory: accountProduct } })
+  if (!updateUser || !updateAccount) {
     res.json('probleum')
-  }else{
+  } else {
     res.json('sucessfull')
   }
 
+})
+
+router.post('/getProduct', async (req, res) => {
+  const { Username } = req.body
+  const getProduct = await Account.findOne({ Username: Username })
+  const { Inventory } = getProduct
+  console.log(Inventory)
+  res.json(Inventory)
+})
+
+router.post('/aaa', async (req, res) => {
+  const update = await Account
 })
 
 
