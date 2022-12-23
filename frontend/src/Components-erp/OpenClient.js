@@ -20,7 +20,7 @@ function OpenClient() {
          Transactions.map((index)=>{
           if(index.BilledTo===Username||index.Sender===Username){
             items.push(index)
-            if(index.Type==='send'){
+            if(index.Type==='Send'){
                 cr = cr+index.GrandTotal;
             }else{
                 dr = dr + index.GrandTotal;
@@ -55,13 +55,13 @@ function OpenClient() {
                                 createdTd.innerText  = index.Date;
                                 break;
                                 case 3:
-                                    if(index.Type==='Received'){
+                                    if(index.Type==='Send'){
                                          createdTd.setAttribute('style',`color:Green`)
                                         createdTd.innerText =  '+' + index.GrandTotal;
                                     }
                                     break;
                                     case 4 :
-                                        if(index.Type==='Send'){
+                                        if(index.Type==='Received'){
                                          createdTd.setAttribute('style',`color:Red`)
 
                                             createdTd.innerText = '-'+ index.GrandTotal;

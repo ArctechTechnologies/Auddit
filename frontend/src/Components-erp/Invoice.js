@@ -287,7 +287,7 @@ const selectValue=(e)=>{          //function to  set both values of b & shipped 
       
     }else if(result==='user not added'){
       window.alert(result)
-    }else if(result==='Offline Party'){
+    }else if(result==='offline party'){
       window.alert('offline party')
     }
     
