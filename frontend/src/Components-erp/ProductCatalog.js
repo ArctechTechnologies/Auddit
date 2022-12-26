@@ -5,8 +5,8 @@ import { useState } from 'react';
 function PlaceOrder() {
 
     function favTutorial() {
-        var mylist = document.getElementById("myList");
-        document.getElementById("favourite").value = mylist.options[mylist.selectedIndex].text;
+           let mylist1 = document.getElementById("myList").value;
+           console.log(mylist1);
     }
 
     let effectCount = 0;
@@ -97,7 +97,7 @@ function PlaceOrder() {
                         break;
                     case 4:
                         createdTd.innerText = ''
-                       
+
                         break;
                     case 5:
                         createdTd.innerText = index.Price
@@ -243,10 +243,10 @@ function PlaceOrder() {
                                 </div>
                             </div><div className="flex justify-center">
                                 <div className="mb-3 xl:w-96">
-                                        <div for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
-                                        >Tax</div>
-                                    <form>
-                                        <select className='  form-control
+                                    <div for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
+                                    >Tax</div>
+
+                                    <select className='  form-control
                                     block
                                     w-full
                                     px-3
@@ -260,13 +260,13 @@ function PlaceOrder() {
                                     transition
                                     ease-in-out
                                     m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' id="myList" onchange="favTutorial()" >
-                                            <option>18% CGST</option>
-                                            <option>18% CGST</option>
-                                            <option>19% CGST</option>
-                                            <option>27% CGST</option>
-                                        </select>
-                                    </form>
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' id="myList" onChange={favTutorial()} >
+                                        <option value={18}>18% CGST</option>
+                                        <option value={9}> 9% CGST</option>
+                                        <option value={27}>27% CGST</option>
+                                        <option value={36}>36% CGST</option>
+                                    </select>
+
 
                                 </div>
                             </div><div className="flex justify-center">
@@ -331,7 +331,7 @@ function PlaceOrder() {
                                 <button className="  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                                     onClick={() => { }} >
                                     Image
-                                </button> 
+                                </button>
 
 
                             </div>
@@ -350,7 +350,7 @@ function PlaceOrder() {
                         </div>
                         <div className="p-5">
                             <div className="absolute top-10 right-12">
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                                     onClick={() => { PromtOpt() }}
                                 >
                                     Add Product

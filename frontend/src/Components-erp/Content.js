@@ -33,6 +33,7 @@ import ProductCatalog from "./ProductCatalog";
 import PlaceOrder from "./PlaceOrder";
 import Clients from "./Clients";
 import OpenClient from "./OpenClient";
+import NewInvoices from "./NewInvoices";
 
 
 function Content(props) {
@@ -239,6 +240,7 @@ function Content(props) {
               <Route path="PlaceOrder" element={<PlaceOrder/>}></Route>
               <Route path="Clients" element={<Clients/>}></Route>
               <Route path="OpenClient" element={<OpenClient/>}></Route>
+              <Route path="NewInvoices" element={<NewInvoices/>}></Route>
 
 
 
