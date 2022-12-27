@@ -122,7 +122,6 @@ function PlaceOrder() {
 
     }
 
-
     const [PromtScale, setPromtScale] = useState('hidden')
     // const [Promt, setPromt] = useState('asdas')
 
