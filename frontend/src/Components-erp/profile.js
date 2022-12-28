@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
 const productdata = [
   {
     image: "logo.png",
@@ -86,6 +87,14 @@ const productdata = [
 // };
 
 function Profile() {
+useEffect(() => {
+  console.log('effect')
+  let user = localStorage.getItem('User')
+  user = JSON.parse(user)
+
+
+ 
+}, [])
 
 
   const navigate = useNavigate()

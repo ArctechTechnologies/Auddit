@@ -135,6 +135,9 @@ function Content(props) {
     localStorage.setItem("Transactions", JSON.stringify(Transactions));
     localStorage.setItem("Accounts", JSON.stringify(account));
     localStorage.setItem("Inventory", JSON.stringify(Inventory));
+    localStorage.setItem("User",JSON.stringify(user))
+   
+
     
   }
 

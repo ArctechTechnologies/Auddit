@@ -36,14 +36,20 @@ const userSchema = new mongoose.Schema({
       Name:{type:String},
       Price:{type:String},
       Image:{type:String},
-      Description:{type:String}
+      Description:{type:String},
+      Tax:{Type:Number}
+
     }
     ] ,
  InvoiceNo:{type:Number},
     Cookie:{
         type:String
-    }  
-    
+    }  ,
+    Update:[{
+        Update:{type:String},
+        Fullfieled:{type:Boolean}
+    }]
+
     
 
 })

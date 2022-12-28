@@ -1,3 +1,4 @@
+import { click } from '@testing-library/user-event/dist/click';
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -5,20 +6,24 @@ import { useState } from 'react';
 function PlaceOrder() {
 
     function favTutorial() {
+        console.log('adadad')
         var mylist = document.getElementById("myList");
         document.getElementById("favourite").value = mylist.options[mylist.selectedIndex].text;
+        setTax(mylist.options[mylist.selectedIndex].text)
+        console.log(Tax)
     }
 
-    let effectCount = 0;
+    
     useEffect(() => {
-        if (effectCount === 0) {
+       
             getdata()
             console.log('effect')
-            effectCount++
-        }
+
+    
     }, [])
     const Products = []
     const select = []
+
     const [TProducts, setTProducts] = useState(0)
     const handleChange = (e) => {
         console.log(e.target.id)
@@ -123,6 +128,11 @@ function PlaceOrder() {
     }
 
     const [PromtScale, setPromtScale] = useState('hidden')
+    const [Tax, setTax] = useState('')
+    const [TaxAmount, setTaxAmount] = useState(0)
+
+
+    
     // const [Promt, setPromt] = useState('asdas')
 
     const PromtOpt = (e) => {
@@ -135,7 +145,17 @@ function PlaceOrder() {
         }
 
     }
+    const on=(e)=>{
+      const aaa = document.getElementById('form').innerText
+      console.log(aaa)
+    //    const aa = e.target.innerText;
+    //    console.log(aa)
+    //    setTax(aa)
 
+    // console.log('on')
+    //   console.log(e)
+
+    }
 
     return (
         <>
@@ -244,8 +264,11 @@ function PlaceOrder() {
                                 <div className="mb-3 xl:w-96">
                                         <div for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
                                         >Tax</div>
-                                    <form>
-                                        <select className='  form-control
+                                    <form id='form'>
+                                        <select 
+                                       
+                                        className='  form-control
+                                        
                                     block
                                     w-full
                                     px-3
@@ -259,11 +282,28 @@ function PlaceOrder() {
                                     transition
                                     ease-in-out
                                     m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' id="myList" onchange="favTutorial()" >
-                                            <option>18% CGST</option>
-                                            <option>18% CGST</option>
-                                            <option>19% CGST</option>
-                                            <option>27% CGST</option>
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' 
+                                    id="myList" onchange={()=>{favTutorial()}} >
+                                            <option onClick={(e)=>{
+                                                setTax(e.target.innerText,
+                                                 console.log(Tax))
+                                            }} >Tax</option>
+                                            <option onClick={(e)=>{
+                                                setTax(e.target.innerText,
+                                                 console.log(Tax))
+                                            }} >9%CGST+9%SGST</option>
+                                            <option onClick={(e)=>{
+                                                setTax(e.target.innerText,
+                                                 console.log(Tax))
+                                            }} >28%GST</option>
+                                            <option onClick={(e)=>{
+                                                setTax(e.target.innerText,
+                                                 console.log(Tax))
+                                            }} >5%GST</option>
+                                            <option onClick={(e)=>{
+                                                setTax(e.target.innerText,
+                                                 console.log(Tax))
+                                            }} >6%SGST+6%CGST</option>
                                         </select>
                                     </form>
 
@@ -336,6 +376,11 @@ function PlaceOrder() {
                             </div>
 
                         </div>
+                        <button className="  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                    onClick={() => { favTutorial()}} >
+                                    Submit
+                                </button> 
+                        
                     </div>
 
                 </div>

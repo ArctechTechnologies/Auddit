@@ -8,6 +8,7 @@ function SearchUser() {
     const [Find, setFind] = useState('asd')
   
    let array =[]
+    let a =0
  
   const navigate=()=>{
     // localStorage.setItem("FindProfile", JSON.stringify(FindProfile));
@@ -26,18 +27,29 @@ function SearchUser() {
     res.map((index)=>{
         array.push(index)
     })
-    const open=(e)=>{
-   let j = e.target.id[0]
+    const appendElement = document.getElementById('tbody')
+    const trElement = document.createElement('tr')
+    const tdElement = document.createElement('td')
+  
+    if(array.length===0){
+       trElement.setAttribute('style',`opacity:50;background-color:red;text-align:center;width:100%`)
+       trElement.setAttribute('id','trx')
+       appendElement.append(trElement)
+       const getElement = document.getElementById('trx')
+       getElement.innerText = 'No user Exists '
+       a =1
 
-   const value = array[--j].Username;
-    localStorage.setItem('find',JSON.stringify(value))
-    Navigate('/userProfile')
+      
+    }else{
 
-    }
+    
 
-     const appendElement = document.getElementById('tbody')
-     const trElement = document.createElement('tr')
-     const tdElement = document.createElement('td')
+ if(a===1){
+
+   const aaa = document.getElementById('trx')
+   aaa.remove()
+  }
+     
      let i=0
     array.map((index)=>{
         i++
@@ -81,11 +93,21 @@ function SearchUser() {
     })
     
   }
+}
   const handleChange=(e)=>{
     const value =  e.target.value;
     setSearchvalue(value)
     console.log(Searchvalue)
   }
+  const open=(e)=>{
+    let j = e.target.id[0]
+ 
+    const value = array[--j].Username;
+     localStorage.setItem('find',JSON.stringify(value))
+     Navigate('/userProfile')
+ 
+     }
+ 
   return (
     <>
       <div className="w-full h-full  " id="body">
