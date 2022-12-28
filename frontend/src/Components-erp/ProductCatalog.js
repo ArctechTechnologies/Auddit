@@ -5,12 +5,24 @@ import { useState } from 'react';
 
 function PlaceOrder() {
 
-    function favTutorial() {
-        console.log('adadad')
-        var mylist = document.getElementById("myList");
-        document.getElementById("favourite").value = mylist.options[mylist.selectedIndex].text;
-        setTax(mylist.options[mylist.selectedIndex].text)
-        console.log(Tax)
+    const  favTutorial=()=> {
+           let mylist1 = document.getElementById("myList").value;
+           console.log('mylist',mylist1);
+
+    }
+    const submit=()=>{
+        let mylist1 = document.getElementById("myList").value;
+        console.log('mylist',mylist1);
+       let product = {
+        name:document.getElementById('Name').value,
+        Description:document.getElementById('Description').value,
+        Code:document.getElementById('Code').value,
+        Tax:mylist1,
+        Price:parseFloat(document.getElementById('Price').value),
+        Stock:parseInt(document.getElementById('Stock').value )  ,
+       }
+        console.log('product',product)
+
     }
 
     
@@ -102,7 +114,7 @@ function PlaceOrder() {
                         break;
                     case 4:
                         createdTd.innerText = ''
-                       
+
                         break;
                     case 5:
                         createdTd.innerText = index.Price
@@ -181,6 +193,7 @@ function PlaceOrder() {
                                     >Name</label
                                     >
                                     <input
+
                                         type="text"
                                         className="
                                     form-control
@@ -199,7 +212,7 @@ function PlaceOrder() {
                                                  m-0
                                                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                                                  "
-                                        id="exampleFormControlInput1"
+                                        id="Name"
                                         placeholder="Name"
                                     />
                                 </div>
@@ -228,7 +241,7 @@ function PlaceOrder() {
                                     m-0
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                                     "
-                                        id="exampleFormControlInput1"
+                                        id="Description"
                                         placeholder="Description"
                                     />
                                 </div>
@@ -256,19 +269,16 @@ function PlaceOrder() {
                                     m-0
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                                     "
-                                        id="exampleFormControlInput1"
+                                        id="Code"
                                         placeholder="HSN CODE"
                                     />
                                 </div>
                             </div><div className="flex justify-center">
                                 <div className="mb-3 xl:w-96">
-                                        <div for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
-                                        >Tax</div>
-                                    <form id='form'>
-                                        <select 
-                                       
-                                        className='  form-control
-                                        
+                                    <div for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
+                                    >Tax</div>
+
+                                    <select className='  form-control
                                     block
                                     w-full
                                     px-3
@@ -282,30 +292,13 @@ function PlaceOrder() {
                                     transition
                                     ease-in-out
                                     m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' 
-                                    id="myList" onchange={()=>{favTutorial()}} >
-                                            <option onClick={(e)=>{
-                                                setTax(e.target.innerText,
-                                                 console.log(Tax))
-                                            }} >Tax</option>
-                                            <option onClick={(e)=>{
-                                                setTax(e.target.innerText,
-                                                 console.log(Tax))
-                                            }} >9%CGST+9%SGST</option>
-                                            <option onClick={(e)=>{
-                                                setTax(e.target.innerText,
-                                                 console.log(Tax))
-                                            }} >28%GST</option>
-                                            <option onClick={(e)=>{
-                                                setTax(e.target.innerText,
-                                                 console.log(Tax))
-                                            }} >5%GST</option>
-                                            <option onClick={(e)=>{
-                                                setTax(e.target.innerText,
-                                                 console.log(Tax))
-                                            }} >6%SGST+6%CGST</option>
-                                        </select>
-                                    </form>
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' id="myList" onChange={()=>favTutorial()} >
+                                        <option value={18}>9%CGST+9%SGST</option>
+                                        <option value={9}> 9% CGST</option>
+                                        <option value={27}>27% CGST</option>
+                                        <option value={36}>36% CGST</option>
+                                    </select>
+
 
                                 </div>
                             </div><div className="flex justify-center">
@@ -314,7 +307,7 @@ function PlaceOrder() {
                                     >Price</label
                                     >
                                     <input
-                                        type="text"
+                                        type="Number"
                                         className="
                                     form-control
                                     block
@@ -332,7 +325,7 @@ function PlaceOrder() {
                                     m-0
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                                     "
-                                        id="exampleFormControlInput1"
+                                        id="Price"
                                         placeholder="price"
                                     />
                                 </div>
@@ -342,7 +335,7 @@ function PlaceOrder() {
                                     >Stock</label
                                     >
                                     <input
-                                        type="text"
+                                        type="Number"
                                         className="
                                     form-control
                                     block
@@ -360,7 +353,7 @@ function PlaceOrder() {
                                     m-0
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                                     "
-                                        id="exampleFormControlInput1"
+                                        id="Stock"
                                         placeholder="Stock"
                                     />
                                 </div>
@@ -370,14 +363,14 @@ function PlaceOrder() {
                                 <button className="  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                                     onClick={() => { }} >
                                     Image
-                                </button> 
+                                </button>
 
 
                             </div>
 
                         </div>
                         <button className="  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                                    onClick={() => { favTutorial()}} >
+                                    onClick={() =>{ submit()}} >
                                     Submit
                                 </button> 
                         
@@ -394,7 +387,7 @@ function PlaceOrder() {
                         </div>
                         <div className="p-5">
                             <div className="absolute top-10 right-12">
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                                     onClick={() => { PromtOpt() }}
                                 >
                                     Add Product
