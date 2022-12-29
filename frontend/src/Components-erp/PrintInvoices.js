@@ -14,7 +14,18 @@ function PrintInvoices(props) {
    const [SelfAdress, setSelfAdress] = useState("");
    const [SelfGSTIN, setSelfGSTIN] = useState("");
    const [SelfEmail, setSelfEmail] = useState("");
-   const [GrandTotal, setGrandTotal] = useState() 
+   const [GrandTotal, setGrandTotal] = useState()
+//  const [props.Self, setprops.Self] = useState('')
+//  const [props.SelfAdress, setprops.SelfAdress] = useState('')
+//  const [props.SelfGSTIN, setprops.SelfGSTIN] = useState('')
+ 
+  // const [Receiver, setReceiver] = useState({
+  //   Name: "",
+  //   Adress: "",
+  //   GSTIN: "",
+  //   Email: "",
+  // });
+  
 
   let detail = [];
 
@@ -43,6 +54,27 @@ function PrintInvoices(props) {
 
   let k = 0;
 
+  // const getData = async () => {
+  //   const cookie = jsCookie.get();
+  //   const { loginCookie } = cookie;
+  //   const Cookie = loginCookie;
+  //   const res = await fetch("/getdata", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ Cookie }),
+  //   });
+  //   const data = await res.json();
+  //   const { Adress, name, GSTIN, Email } = data;
+  //   // setData({ Name: Name });
+  //   // setData({ Adress: Adress });
+  //   // setData({ GSTIN: GSTIN });
+  //   // setData({ Email: Email });
+  //   // console.log('data',data)
+  //   setprops.Self(name)
+  //   setprops.SelfAdress(Adress)
+  //   setprops.SelfGSTIN(GSTIN)
+
+  // }
 
     const Getdata = () => {
       const nam = localStorage.getItem("Username");

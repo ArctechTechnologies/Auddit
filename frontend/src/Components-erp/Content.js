@@ -219,7 +219,8 @@ function Content(props) {
           <div className="bg-white ml-1  w-5/6 absolute   h-screen       overflow-auto   ">
             <Routes>
               <Route exact path="/settings" element={<Settings />}></Route>
-              <Route exact path="Account" element={<Accounts />}></Route>
+              <Route exact path="/Account" element={<Accounts />}></Route>
+              <Route exact path="/Account" element={<Accounts />}></Route>
               <Route
                 exact
                 path="/AddDemoClient"
@@ -241,7 +242,13 @@ function Content(props) {
               <Route path="productCatalog" element={<ProductCatalog/>}></Route>
               <Route path="PlaceOrder" element={<PlaceOrder/>}></Route>
               <Route path="Clients" element={<Clients/>}></Route>
+<<<<<<< HEAD
            
+=======
+              <Route path="OpenClient" element={<OpenClient/>}></Route>
+
+
+>>>>>>> parent of 84d0918 (Debit Account page added)
 
               <Route path="/" element={<Home />}></Route>
             </Routes>
