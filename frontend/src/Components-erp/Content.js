@@ -34,7 +34,10 @@ import PlaceOrder from "./PlaceOrder";
 import Clients from "./Clients";
 import OpenClient from "./OpenClient";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import DebitAccount from "./DebitAccount";
+=======
+>>>>>>> parent of 164c9c3 (productCatalog Tax added)
 =======
 >>>>>>> parent of 164c9c3 (productCatalog Tax added)
 
@@ -246,9 +249,12 @@ function Content(props) {
               <Route path="Clients" element={<Clients/>}></Route>
               <Route path="OpenClient" element={<OpenClient/>}></Route>
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Route path="DebitAccount" element={<DebitAccount/>}></Route>
               
 =======
+=======
+>>>>>>> parent of 164c9c3 (productCatalog Tax added)
 
 >>>>>>> parent of 164c9c3 (productCatalog Tax added)
 

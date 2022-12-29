@@ -6,6 +6,7 @@ import { useState } from 'react';
 function PlaceOrder() {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     const  favTutorial=()=> {
            let mylist1 = document.getElementById("myList").value;
            console.log('mylist',mylist1);
@@ -24,6 +25,11 @@ function PlaceOrder() {
        }
         console.log('product',product)
 
+=======
+    function favTutorial() {
+        var mylist = document.getElementById("myList");
+        document.getElementById("favourite").value = mylist.options[mylist.selectedIndex].text;
+>>>>>>> parent of 164c9c3 (productCatalog Tax added)
 =======
     function favTutorial() {
         var mylist = document.getElementById("myList");
@@ -299,6 +305,7 @@ function PlaceOrder() {
                                     ease-in-out
                                     m-0
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' id="myList" onChange={()=>favTutorial()} >
                                         <option value={18}>9%CGST+9%SGST</option>
                                         <option value={9}> 9% CGST</option>
@@ -307,6 +314,8 @@ function PlaceOrder() {
                                     </select>
 
 =======
+=======
+>>>>>>> parent of 164c9c3 (productCatalog Tax added)
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' id="myList" onchange="favTutorial()" >
                                             <option>18% CGST</option>
                                             <option>18% CGST</option>
@@ -314,6 +323,9 @@ function PlaceOrder() {
                                             <option>27% CGST</option>
                                         </select>
                                     </form>
+<<<<<<< HEAD
+>>>>>>> parent of 164c9c3 (productCatalog Tax added)
+=======
 >>>>>>> parent of 164c9c3 (productCatalog Tax added)
 
                                 </div>
