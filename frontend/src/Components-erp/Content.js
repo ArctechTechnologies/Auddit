@@ -33,14 +33,8 @@ import ProductCatalog from "./ProductCatalog";
 import PlaceOrder from "./PlaceOrder";
 import Clients from "./Clients";
 import OpenClient from "./OpenClient";
-<<<<<<< HEAD
-<<<<<<< HEAD
-import DebitAccount from "./DebitAccount";
-=======
->>>>>>> parent of 164c9c3 (productCatalog Tax added)
-=======
->>>>>>> parent of 164c9c3 (productCatalog Tax added)
 
+import DebitAccount from "./DebitAccount";
 
 function Content(props) {
   const Navigate = useNavigate()
@@ -247,17 +241,7 @@ function Content(props) {
               <Route path="productCatalog" element={<ProductCatalog/>}></Route>
               <Route path="PlaceOrder" element={<PlaceOrder/>}></Route>
               <Route path="Clients" element={<Clients/>}></Route>
-              <Route path="OpenClient" element={<OpenClient/>}></Route>
-<<<<<<< HEAD
-<<<<<<< HEAD
-              <Route path="DebitAccount" element={<DebitAccount/>}></Route>
-              
-=======
-=======
->>>>>>> parent of 164c9c3 (productCatalog Tax added)
-
->>>>>>> parent of 164c9c3 (productCatalog Tax added)
-
+           
 
               <Route path="/" element={<Home />}></Route>
             </Routes>
