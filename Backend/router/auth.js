@@ -445,7 +445,7 @@ router.post('/getProduct', async (req, res) => {
 })
 
 router.post('/aaa', async (req, res) => {
-  const update = await Account
+  const update = await User.findOneAndUpdate({})
 })
 
 

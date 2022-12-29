@@ -97,6 +97,7 @@ function Userprofile(props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ Username, Cookie,username,Name }),
     }).then((res) => res.json());
+    
     console.log(res)
     if (res === "Sucessfull") {
       window.alert("Added SucessFully");
