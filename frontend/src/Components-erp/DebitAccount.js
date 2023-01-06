@@ -1,20 +1,20 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-function CreditAccount() {
+function DebitAccount() {
    let data=[]
-   const [totalCredit, settotalCredit] = useState(0)
+   const [totalDebit, settotalDebit] = useState(0)
    let dr = 0
    useEffect(() => {
     let  Transactions = localStorage.getItem('Transactions')
     Transactions = JSON.parse(Transactions)
     Transactions.map((index)=>{
-       if(index.Type==='Send'){
+       if(index.Type==='Received'){
              dr = dr+index.GrandTotal;
              data.push(index)
        }
     })
-      settotalCredit(dr)
+      settotalDebit(dr)
       console.log('data',data)
 
        data.map((index,i)=>{
@@ -34,7 +34,7 @@ function CreditAccount() {
                createdTd.innerText = i
                break;
                case 1:
-                  createdTd.innerText = index.BilledTo
+                  createdTd.innerText = index.Sender
                  break;
                  case 2 :
                    createdTd.innerText = index.invoiceNo;
@@ -46,7 +46,7 @@ function CreditAccount() {
                        break;
                        case 4:
 
-                           createdTd.setAttribute('style',`color:green`)
+                           createdTd.setAttribute('style',`color:Red`)
                            createdTd.innerText = index.GrandTotal;
 
 
@@ -75,9 +75,9 @@ function CreditAccount() {
                   <div className="flex">
                      <div style={{}} className=" p-5 ">
                         <div className=" text-sm 1px solid gray  ">
-                                Total Credit
+                                Total Debit
                             </div>
-                            <div className="text-xl font-medium text-center w-full">₹{totalCredit}</div>
+                            <div className="text-xl font-medium text-center w-full">₹{totalDebit}</div>
                           </div>
                             <div className="p-5">
                             <div className="absolute top-10 right-12">
@@ -139,4 +139,4 @@ function CreditAccount() {
   )
 }
 
-export default CreditAccount
+export default DebitAccount

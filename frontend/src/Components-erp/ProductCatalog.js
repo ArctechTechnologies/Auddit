@@ -142,7 +142,7 @@ function PlaceOrder() {
     const [PromtScale, setPromtScale] = useState('hidden')
     const [Tax, setTax] = useState('')
     const [TaxAmount, setTaxAmount] = useState(0)
-
+  const [Codetype,setCodetype] = useState('')
 
     
     // const [Promt, setPromt] = useState('asdas')
@@ -185,7 +185,7 @@ function PlaceOrder() {
                         </div>
                         <div className="text-center font-bold text-2xl  ">Add Product</div>
                         <br></br>
-                        <div className='grid grid-flow-col grid-cols-7 gap-2'>
+                        <div className='grid grid-flow-col grid-cols-8 gap-2'>
 
                             <div className="flex justify-center">
                                 <div className="mb-3 xl:w-96">
@@ -245,10 +245,44 @@ function PlaceOrder() {
                                         placeholder="Description"
                                     />
                                 </div>
-                            </div><div className="flex justify-center">
+                            </div>
+                            
+                            
+                            <div className="flex justify-center">
+                                <div className="mb-3 xl:w-96">
+                                    <div for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
+                                    >CODE</div>
+
+                                    <select className='  form-control
+                                    block
+                                    w-full
+                                    px-3
+                                    py-1.5
+                                    text-base
+                                    font-normal
+                                    text-gray-700
+                                    bg-white bg-clip-padding
+                                    border border-solid border-gray-300
+                                    rounded
+                                    transition
+                                    ease-in-out
+                                    m-0
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none' id="myList" onChange={()=>{}} >
+                                        <option onClick={()=>{setCodetype('null')}}>CODE</option>
+                                        <option onClick={()=>{setCodetype('HSN')}}>HSN</option>
+                                        <option onClick={()=>{setCodetype('SAC')}}> SAC</option>
+                                        <option onClick={()=>{setCodetype('Custom')
+                                        console.log('custm')}}>Custom</option>
+                                      
+                                    </select>
+
+
+                                </div>
+                            </div>
+                            <div className="flex justify-center">
                                 <div className="mb-3 xl:w-96">
                                     <label for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
-                                    >HSN CODE</label
+                                    > CODE</label
                                     >
                                     <input
                                         type="text"
@@ -273,7 +307,9 @@ function PlaceOrder() {
                                         placeholder="HSN CODE"
                                     />
                                 </div>
-                            </div><div className="flex justify-center">
+                            </div>
+                            
+                            <div className="flex justify-center">
                                 <div className="mb-3 xl:w-96">
                                     <div for="exampleFormControlInput1" className="form-label  font-medium inline-block mb-2 text-gray-700"
                                     >Tax</div>

@@ -12,7 +12,8 @@ function Accounts() {
                <div className='pr-24 p-5 pt-0 text-xl text-white'>Credit:</div>
                <div className='pl-14 pb-12 text-white text-2xl'>7000</div>
           </div>
-          <div className='h-fit w-52  bg-gradient-to-r from-purple-500 to-violet-600 rounded-lg shadow-xl cursor-pointer hover:scale-110 hover:shadow-slate-600 '>
+          <div className='h-fit w-52  bg-gradient-to-r from-purple-500 to-violet-600 rounded-lg shadow-xl cursor-pointer hover:scale-110 hover:shadow-slate-600 '
+          onClick={()=>{Navigate('/DebitAccount')}}>
                <div className='pr-24 p-5 pt-0 text-xl text-white'>Debit:</div>
                <div className='pl-14 pb-12 text-white text-2xl'>7000</div>
           </div>

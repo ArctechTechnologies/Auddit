@@ -242,13 +242,12 @@ function Content(props) {
               <Route path="productCatalog" element={<ProductCatalog/>}></Route>
               <Route path="PlaceOrder" element={<PlaceOrder/>}></Route>
               <Route path="Clients" element={<Clients/>}></Route>
-<<<<<<< HEAD
            
-=======
               <Route path="OpenClient" element={<OpenClient/>}></Route>
+              <Route path="DebitAccount" element={<DebitAccount/>}></Route>
+              
 
 
->>>>>>> parent of 84d0918 (Debit Account page added)
 
               <Route path="/" element={<Home />}></Route>
             </Routes>
